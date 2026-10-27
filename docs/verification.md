@@ -178,8 +178,9 @@ Playwright 1.64.1（Chromium 156 headless）对 `http://127.0.0.1:18081` 执行�
 1. **旧请求串租户**：拦截 Alice 的列表响应并延迟 1.2s，在响应到达前切换到 Bob。结果 Bob 列表只含 West 数据，没有 East 行；详情请求延迟后关闭抽屉再切换租户，抽屉保持关闭且不写回旧详情。
 2. **清空筛选发送空参数**：选择课程/状态后再清空，检查最近一次列表请求的 URL：`courseId` 和 `status` 均不再出现，列表恢复完整数据。
 3. **切换租户保留旧课程 ID**：在 Alice 选择 `Safety 101`（courseId=1）后切到 Bob，列表请求不再携带 `courseId`，页面显示 West 的 2 张证书；批量发证弹窗中的课程选择也被清空。
+4. **同身份重开弹窗回写旧结果**：延迟发证响应 1.5s → 关闭弹窗 → 重新打开并选择同一课程 → 释放旧响应。新弹窗不显示“操作结果”，提交按钮保持可用；随后新提交能正常执行并显示结果。
 
-修复方式：所有异步加载统一捕获 `{epoch, token}`，响应落地前同时校验两者；切换租户会中止 me/courses/list/detail/enrollment/submit/revoke/export 的 AbortController，并重置全部筛选条件。列表与 CSV 共用同一个查询构造函数，只发送有效值。浏览器回归与主路径冒烟均通过。
+修复方式：所有异步加载统一捕获 `{epoch, token}`，响应落地前同时校验两者；切换租户会中止 me/courses/list/detail/enrollment/submit/revoke/export 的 AbortController，并重置全部筛选条件。列表与 CSV 共用同一个查询构造函数，只发送有效值。发证弹窗另有独立的 `issueAttempt` 操作实例号，打开、关闭、切换课程和切换租户都会递增；旧实例的提交结果、错误和报名刷新均被丢弃。浏览器回归与主路径冒烟均通过。
 
 ## 5. 未强制覆盖的边界
 

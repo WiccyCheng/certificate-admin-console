@@ -85,6 +85,11 @@ let submitController: AbortController | null = null
 let revokeController: AbortController | null = null
 let exportController: AbortController | null = null
 
+// Each open/close/course change creates a new issuance operation instance.
+// A response from an older instance must never populate the current dialog,
+// even when the actor and course are unchanged.
+let issueAttempt = 0
+
 function captureContext(): RequestContext {
   return { epoch, token: actorToken.value }
 }
@@ -296,13 +301,22 @@ async function revoke(): Promise<void> {
   }
 }
 
-function resetIssueState(): void {
-  issueCourseId.value = undefined
-  enrollments.value = []
-  enrollmentTotal.value = 0
+function resetIssueOperation(): void {
+  issueAttempt++
+  submitController?.abort()
+  issuing.value = false
   bulkResult.value = null
   issueError.value = ''
   issueKey.value = null
+}
+
+function resetIssueState(): void {
+  resetIssueOperation()
+  issueCourseId.value = undefined
+  enrollments.value = []
+  enrollmentTotal.value = 0
+  enrollmentController?.abort()
+  enrollmentsLoading.value = false
 }
 
 function openIssue(): void {
@@ -315,18 +329,19 @@ function closeIssue(): void {
 }
 
 function onIssueClosed(): void {
-  enrollmentController?.abort()
-  resetIssueState()
+  // A stale `closed` event from the previous dialog must not wipe a dialog
+  // that has already been reopened.
+  if (!issueVisible.value) resetIssueState()
 }
 
 function onIssueCourseChange(): void {
-  bulkResult.value = null
-  issueError.value = ''
-  issueKey.value = null
+  resetIssueOperation()
+  enrollments.value = []
+  enrollmentTotal.value = 0
   void loadEnrollments()
 }
 
-async function loadEnrollments(): Promise<void> {
+async function loadEnrollments(attempt = issueAttempt): Promise<void> {
   if (issueCourseId.value === undefined) return
   enrollmentController?.abort()
   const controller = new AbortController()
@@ -336,11 +351,11 @@ async function loadEnrollments(): Promise<void> {
   enrollmentsLoading.value = true
   try {
     const result = await listCourseEnrollments(ctx.token, courseId, controller.signal)
-    if (!isCurrent(ctx) || issueCourseId.value !== courseId) return
+    if (!isCurrent(ctx) || !issueVisible.value || issueCourseId.value !== courseId || attempt !== issueAttempt) return
     enrollments.value = result.items
     enrollmentTotal.value = result.total
   } catch (err) {
-    if (!isCurrent(ctx) || isAbort(err)) return
+    if (!isCurrent(ctx) || !issueVisible.value || isAbort(err) || attempt !== issueAttempt) return
     issueError.value = errorText(err)
   } finally {
     if (enrollmentController === controller) enrollmentsLoading.value = false
@@ -358,6 +373,7 @@ async function submitIssue(): Promise<void> {
   if (issueCourseId.value === undefined || issuing.value || bulkResult.value) return
   const ctx = captureContext()
   const courseId = issueCourseId.value
+  const attempt = issueAttempt
   if (issueKey.value === null) issueKey.value = makeIdempotencyKey()
 
   submitController?.abort()
@@ -367,15 +383,22 @@ async function submitIssue(): Promise<void> {
   issueError.value = ''
   try {
     const result = await bulkIssue(ctx.token, courseId, issueKey.value, controller.signal)
-    if (!isCurrent(ctx) || issueCourseId.value !== courseId) return
+    if (
+      !isCurrent(ctx) ||
+      !issueVisible.value ||
+      issueCourseId.value !== courseId ||
+      attempt !== issueAttempt
+    ) {
+      return
+    }
     bulkResult.value = result
     ElMessage.success(`操作已提交：发证 ${result.issued}，跳过 ${result.skipped}，失败 ${result.failed}`)
-    await Promise.all([loadCertificates(1), loadEnrollments()])
+    await Promise.all([loadCertificates(1), loadEnrollments(attempt)])
   } catch (err) {
-    if (!isCurrent(ctx) || isAbort(err)) return
+    if (!isCurrent(ctx) || isAbort(err) || attempt !== issueAttempt) return
     issueError.value = errorText(err)
   } finally {
-    if (isCurrent(ctx)) issuing.value = false
+    if (isCurrent(ctx) && attempt === issueAttempt) issuing.value = false
   }
 }
 
