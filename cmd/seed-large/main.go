@@ -3,6 +3,7 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/json"
 	"errors"
 	"flag"
@@ -297,6 +298,34 @@ func buildManifest(db *store.DB, tenantCode string, target int) (manifest, error
 		out.DateDistribution[date] = count
 	}
 	dateRows.Close()
+
+	var exportCourseID int64
+	err = db.Read.QueryRow(`SELECT id FROM courses WHERE tenant_id = ? AND title = 'Export Load'`, tenantID).Scan(&exportCourseID)
+	if err == nil {
+		var certs, enrollments, audits, active int64
+		if err := db.Read.QueryRow(`SELECT COUNT(*), SUM(CASE WHEN status = 'ACTIVE' THEN 1 ELSE 0 END)
+			FROM certificates WHERE tenant_id = ? AND course_id = ?`, tenantID, exportCourseID).Scan(&certs, &active); err != nil {
+			return out, err
+		}
+		if err := db.Read.QueryRow(`SELECT COUNT(*) FROM enrollments WHERE tenant_id = ? AND course_id = ?`,
+			tenantID, exportCourseID).Scan(&enrollments); err != nil {
+			return out, err
+		}
+		if err := db.Read.QueryRow(`SELECT COUNT(*) FROM audit_events a
+			JOIN certificates c ON c.tenant_id = a.tenant_id AND c.id = a.certificate_id
+			WHERE c.tenant_id = ? AND c.course_id = ? AND a.event_type = 'ISSUED'`,
+			tenantID, exportCourseID).Scan(&audits); err != nil {
+			return out, err
+		}
+		if certs != enrollments || audits != certs || active != certs {
+			return out, fmt.Errorf("Export Load counts differ: certs=%d enrollments=%d audits=%d active=%d",
+				certs, enrollments, audits, active)
+		}
+		out.Verified["exportLoadConsistency"] = fmt.Sprintf("certs=%d enrollments=%d audits=%d active=%d",
+			certs, enrollments, audits, active)
+	} else if !errors.Is(err, sql.ErrNoRows) {
+		return out, err
+	}
 
 	var nameMatches, serialMatches int64
 	if err := db.Read.QueryRow(`

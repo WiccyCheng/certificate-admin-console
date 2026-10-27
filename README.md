@@ -145,7 +145,7 @@ A1–A7 自动化覆盖：
 ### 实测结果（2026-10-27，WSL2 / Go 1.22.5 / Node 24.3.0）
 
 - `go test -race ./...`：通过，约 3.1s。
-- 100,000 行生成：**9.86s**，峰值内存约 117MB；`foreign_key_check`、`integrity_check`、审计一致性均通过。
+- 100,000 行生成：**9.83s**，峰值内存约 114MB；`foreign_key_check`、`integrity_check`、审计一致性均通过。
 - 100,000 行 CSV：**0.397s**，5,800,049 字节，100,001 行；两次导出 SHA-256 相同。
 - 筛选 `Load Learner 007`：1,000 行，**0.051s**，58,054 字节。
 - 导出期间列表请求：`200`，**0.034s**。
@@ -181,4 +181,4 @@ ai/                   AI 会话导出、索引、决策日志、完整性声明
 - 中文字体使用 Noto Sans CJK SC 子集（`web/src/assets/`，SIL OFL，许可证随附），避免目标机器缺少 CJK 字体时出现方框。
 - 题目 PDF 未提交到仓库；实现依据为 `docs/` 中已冻结的契约。
 - 单机 SQLite，不承诺多主机共享本地数据库。
-- AI 交付记录见 [ai/completeness.md](ai/completeness.md)；实现会话之前的历史规划会话不在当前环境可导出范围内，已如实披露。
+- AI 交付记录见 [ai/completeness.md](ai/completeness.md)；相关规划、环境失败运行、实现和子代理会话均已导出，快照边界见完整性声明。

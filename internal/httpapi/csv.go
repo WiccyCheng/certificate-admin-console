@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strings"
 	"unicode"
+	"unicode/utf8"
 
 	"certadmin/internal/service"
 
@@ -110,10 +111,9 @@ func needsQuoting(value string) bool {
 	if strings.ContainsAny(value, ",\"\r\n") {
 		return true
 	}
-	if value[0] == ' ' || value[0] == '\t' {
-		return true
-	}
-	if value[len(value)-1] == ' ' || value[len(value)-1] == '\t' {
+	first, _ := utf8.DecodeRuneInString(value)
+	last, _ := utf8.DecodeLastRuneInString(value)
+	if unicode.IsSpace(first) || unicode.IsSpace(last) {
 		return true
 	}
 	return false

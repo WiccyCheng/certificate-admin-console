@@ -127,7 +127,7 @@ list_status=200 list_time=0.033825s
 go run ./cmd/seed-large --db data/large-demo.db --tenant east --certificates 100000
 ```
 
-实测 **9.86s**，峰值内存约 117MB。manifest：
+实测 **9.83s**，峰值内存约 114MB。manifest：
 
 ```json
 {
@@ -147,6 +147,7 @@ go run ./cmd/seed-large --db data/large-demo.db --tenant east --certificates 100
     "serialNumber=EAST-LOAD-000007": 1
   },
   "verified": {
+    "exportLoadConsistency": "certs=99998 enrollments=99998 audits=99998 active=99998",
     "foreignKeyCheck": "ok",
     "integrityCheck": "ok",
     "issuedAuditConsistency": "ok",
@@ -176,4 +177,4 @@ Playwright 1.64.1（Chromium 156 headless）对 `http://127.0.0.1:18081` 执行�
 - `503 TEMPORARILY_UNAVAILABLE`：已实现 SQLite busy 检测与 `Retry-After`，测试未把 10s busy timeout 耗尽。
 - CSV 中途错误使用注入读取错误验证，不是物理磁盘故障。
 - 浏览器冒烟覆盖主路径，不包含所有分页/空态/网络中断组合。
-- AI 记录：本会话之前的规划会话不在当前 OpenCode 环境可导出范围，详见 `ai/completeness.md`。
+- AI 记录：相关规划、环境失败运行、实现和子代理会话均已导出；快照边界详见 `ai/completeness.md`。

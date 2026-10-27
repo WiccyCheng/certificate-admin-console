@@ -45,6 +45,7 @@ func main() {
 	svc := service.New(db)
 	srv := httpapi.New(svc)
 	mux := http.NewServeMux()
+	mux.Handle("/api", srv.Handler())
 	mux.Handle("/api/", srv.Handler())
 	mux.Handle("/", spaHandler(*webDir))
 

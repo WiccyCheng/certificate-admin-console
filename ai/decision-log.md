@@ -88,7 +88,7 @@
 
 - 决定：`cmd/seed-large` 只写显式指定的新文件，拒绝与默认库相同或已存在；先建 schema/默认种子，再按 2,000 行批次补齐 East 至目标总数；确定性 ID/姓名/序列号/时间；输出 manifest 并执行 `foreign_key_check`、`integrity_check`、审计一致性检查。
 - 拒绝：把 100,000 行写入 `data/demo.db`；随机数据；单事务插入全部行；覆盖已有文件；关闭外键或约束换速度。
-- 证据：`cmd/seed-large/main.go`；`data/large-demo.manifest.json`（本地生成，不入库）；生成 9.86s，检查全部 ok。
+- 证据：`cmd/seed-large/main.go`；`data/large-demo.manifest.json`（本地生成，不入库）；生成 9.83s，检查全部 ok。
 - 提交：`2df1eee`。
 
 ## D11 验证策略
