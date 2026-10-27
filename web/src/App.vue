@@ -70,10 +70,30 @@ const bulkResult = ref<BulkOperationResult | null>(null)
 const issueError = ref('')
 const issueKey = ref<string | null>(null)
 
+interface RequestContext {
+  epoch: number
+  token: string
+}
+
 let epoch = 0
+let meController: AbortController | null = null
+let coursesController: AbortController | null = null
 let listController: AbortController | null = null
 let detailController: AbortController | null = null
 let enrollmentController: AbortController | null = null
+let submitController: AbortController | null = null
+let revokeController: AbortController | null = null
+let exportController: AbortController | null = null
+
+function captureContext(): RequestContext {
+  return { epoch, token: actorToken.value }
+}
+
+// A response is only allowed to touch UI state if both the tenant selection and
+// the request generation are still current.
+function isCurrent(ctx: RequestContext): boolean {
+  return ctx.epoch === epoch && ctx.token === actorToken.value
+}
 
 const currentActorLabel = computed(() => actors.find((actor) => actor.token === actorToken.value)?.label ?? '')
 const issueCourseTitle = computed(() => courses.value.find((course) => course.id === issueCourseId.value)?.title ?? '')
@@ -97,24 +117,30 @@ function isAbort(err: unknown): boolean {
   return err instanceof DOMException && err.name === 'AbortError'
 }
 
-async function loadMe(currentEpoch: number, token: string): Promise<void> {
+async function loadMe(ctx: RequestContext): Promise<void> {
+  meController?.abort()
+  const controller = new AbortController()
+  meController = controller
   try {
-    const result = await getMe(token)
-    if (currentEpoch !== epoch) return
+    const result = await getMe(ctx.token, controller.signal)
+    if (!isCurrent(ctx)) return
     me.value = result
   } catch (err) {
-    if (currentEpoch !== epoch || isAbort(err)) return
+    if (!isCurrent(ctx) || isAbort(err)) return
     error.value = errorText(err)
   }
 }
 
-async function loadCourses(currentEpoch: number, token: string): Promise<void> {
+async function loadCourses(ctx: RequestContext): Promise<void> {
+  coursesController?.abort()
+  const controller = new AbortController()
+  coursesController = controller
   try {
-    const result = await listCourses(token)
-    if (currentEpoch !== epoch) return
+    const result = await listCourses(ctx.token, controller.signal)
+    if (!isCurrent(ctx)) return
     courses.value = result.items
   } catch (err) {
-    if (currentEpoch !== epoch || isAbort(err)) return
+    if (!isCurrent(ctx) || isAbort(err)) return
     error.value = errorText(err)
   }
 }
@@ -124,15 +150,14 @@ async function loadCertificates(page = filters.page): Promise<void> {
   listController?.abort()
   const controller = new AbortController()
   listController = controller
-  const currentEpoch = epoch
-  const token = actorToken.value
+  const ctx = captureContext()
   loading.value = true
   try {
-    const result = await listCertificates(token, filters, controller.signal)
-    if (currentEpoch !== epoch) return
+    const result = await listCertificates(ctx.token, filters, controller.signal)
+    if (!isCurrent(ctx)) return
     certificates.value = result
   } catch (err) {
-    if (currentEpoch !== epoch || isAbort(err)) return
+    if (!isCurrent(ctx) || isAbort(err)) return
     error.value = errorText(err)
   } finally {
     if (listController === controller) loading.value = false
@@ -140,33 +165,55 @@ async function loadCertificates(page = filters.page): Promise<void> {
 }
 
 async function bootstrap(): Promise<void> {
-  const currentEpoch = epoch
-  const token = actorToken.value
-  await Promise.all([loadMe(currentEpoch, token), loadCourses(currentEpoch, token)])
-  if (currentEpoch === epoch) await loadCertificates(1)
+  const ctx = captureContext()
+  await Promise.all([loadMe(ctx), loadCourses(ctx)])
+  if (!isCurrent(ctx)) return
+  await loadCertificates(1)
 }
 
 async function switchActor(): Promise<void> {
   epoch++
+  meController?.abort()
+  coursesController?.abort()
   listController?.abort()
   detailController?.abort()
   enrollmentController?.abort()
+  submitController?.abort()
+  revokeController?.abort()
+  exportController?.abort()
+
   detailVisible.value = false
   issueVisible.value = false
   detail.value = null
-  certificates.value = emptyPage(filters.pageSize)
+  detailLoading.value = false
+  revoking.value = false
+  issuing.value = false
+  exporting.value = false
+  enrollmentsLoading.value = false
+  loading.value = false
   courses.value = []
   me.value = null
-  bulkResult.value = null
-  enrollments.value = []
-  issueError.value = ''
   error.value = ''
-  filters.page = 1
+  resetIssueState()
+
+  // Tenant-specific filters (notably courseId) must never survive a switch.
+  Object.assign(filters, defaultFilters())
+  certificates.value = emptyPage(filters.pageSize)
   await bootstrap()
 }
 
 function applyFilters(): void {
   void loadCertificates(1)
+}
+
+function onStatusChange(value: unknown): void {
+  filters.status = value === 'ACTIVE' || value === 'REVOKED' ? value : ''
+  applyFilters()
+}
+
+function onCourseChange(value: unknown): void {
+  filters.courseId = typeof value === 'number' && Number.isInteger(value) && value > 0 ? value : undefined
+  applyFilters()
 }
 
 function resetFilters(): void {
@@ -190,13 +237,13 @@ async function openDetail(row: CertificateListItem): Promise<void> {
   detailController?.abort()
   const controller = new AbortController()
   detailController = controller
-  const currentEpoch = epoch
+  const ctx = captureContext()
   try {
-    const result = await getCertificate(actorToken.value, row.id, controller.signal)
-    if (currentEpoch !== epoch) return
+    const result = await getCertificate(ctx.token, row.id, controller.signal)
+    if (!isCurrent(ctx)) return
     detail.value = result
   } catch (err) {
-    if (currentEpoch !== epoch || isAbort(err)) return
+    if (!isCurrent(ctx) || isAbort(err)) return
     error.value = errorText(err)
     detailVisible.value = false
   } finally {
@@ -204,11 +251,15 @@ async function openDetail(row: CertificateListItem): Promise<void> {
   }
 }
 
-async function reloadDetail(): Promise<void> {
+async function reloadDetail(ctx: RequestContext): Promise<void> {
   if (!detail.value) return
+  const certificateId = detail.value.id
   try {
-    detail.value = await getCertificate(actorToken.value, detail.value.id)
+    const result = await getCertificate(ctx.token, certificateId)
+    if (!isCurrent(ctx)) return
+    detail.value = result
   } catch (err) {
+    if (!isCurrent(ctx) || isAbort(err)) return
     error.value = errorText(err)
   }
 }
@@ -216,6 +267,7 @@ async function reloadDetail(): Promise<void> {
 async function revoke(): Promise<void> {
   if (!detail.value) return
   const target = detail.value
+  const ctx = captureContext()
   try {
     await ElMessageBox.confirm(
       `确认吊销证书 ${target.serialNumber}？吊销是终态，不能恢复或重新发证。`,
@@ -225,15 +277,22 @@ async function revoke(): Promise<void> {
   } catch {
     return
   }
+  if (!isCurrent(ctx)) return
+
+  revokeController?.abort()
+  const controller = new AbortController()
+  revokeController = controller
   revoking.value = true
   try {
-    const result = await revokeCertificate(actorToken.value, target.id)
+    const result = await revokeCertificate(ctx.token, target.id, controller.signal)
+    if (!isCurrent(ctx)) return
     ElMessage.success(`已吊销：${result.revokedAt}`)
-    await Promise.all([reloadDetail(), loadCertificates()])
+    await Promise.all([reloadDetail(ctx), loadCertificates()])
   } catch (err) {
+    if (!isCurrent(ctx) || isAbort(err)) return
     error.value = errorText(err)
   } finally {
-    revoking.value = false
+    if (isCurrent(ctx)) revoking.value = false
   }
 }
 
@@ -272,16 +331,16 @@ async function loadEnrollments(): Promise<void> {
   enrollmentController?.abort()
   const controller = new AbortController()
   enrollmentController = controller
-  const currentEpoch = epoch
+  const ctx = captureContext()
   const courseId = issueCourseId.value
   enrollmentsLoading.value = true
   try {
-    const result = await listCourseEnrollments(actorToken.value, courseId, controller.signal)
-    if (currentEpoch !== epoch) return
+    const result = await listCourseEnrollments(ctx.token, courseId, controller.signal)
+    if (!isCurrent(ctx) || issueCourseId.value !== courseId) return
     enrollments.value = result.items
     enrollmentTotal.value = result.total
   } catch (err) {
-    if (currentEpoch !== epoch || isAbort(err)) return
+    if (!isCurrent(ctx) || isAbort(err)) return
     issueError.value = errorText(err)
   } finally {
     if (enrollmentController === controller) enrollmentsLoading.value = false
@@ -297,19 +356,26 @@ function makeIdempotencyKey(): string {
 
 async function submitIssue(): Promise<void> {
   if (issueCourseId.value === undefined || issuing.value || bulkResult.value) return
+  const ctx = captureContext()
   const courseId = issueCourseId.value
   if (issueKey.value === null) issueKey.value = makeIdempotencyKey()
+
+  submitController?.abort()
+  const controller = new AbortController()
+  submitController = controller
   issuing.value = true
   issueError.value = ''
   try {
-    const result = await bulkIssue(actorToken.value, courseId, issueKey.value)
+    const result = await bulkIssue(ctx.token, courseId, issueKey.value, controller.signal)
+    if (!isCurrent(ctx) || issueCourseId.value !== courseId) return
     bulkResult.value = result
     ElMessage.success(`操作已提交：发证 ${result.issued}，跳过 ${result.skipped}，失败 ${result.failed}`)
     await Promise.all([loadCertificates(1), loadEnrollments()])
   } catch (err) {
+    if (!isCurrent(ctx) || isAbort(err)) return
     issueError.value = errorText(err)
   } finally {
-    issuing.value = false
+    if (isCurrent(ctx)) issuing.value = false
   }
 }
 
@@ -357,9 +423,14 @@ function resultReasonText(reason: string | null): string {
 }
 
 async function downloadCsv(): Promise<void> {
+  const ctx = captureContext()
+  exportController?.abort()
+  const controller = new AbortController()
+  exportController = controller
   exporting.value = true
   try {
-    const blob = await exportCertificates(actorToken.value, filters)
+    const blob = await exportCertificates(ctx.token, filters, controller.signal)
+    if (!isCurrent(ctx)) return
     const url = URL.createObjectURL(blob)
     const anchor = document.createElement('a')
     anchor.href = url
@@ -370,9 +441,10 @@ async function downloadCsv(): Promise<void> {
     URL.revokeObjectURL(url)
     ElMessage.success('CSV 已开始下载')
   } catch (err) {
+    if (!isCurrent(ctx) || isAbort(err)) return
     error.value = errorText(err)
   } finally {
-    exporting.value = false
+    if (isCurrent(ctx)) exporting.value = false
   }
 }
 
@@ -424,11 +496,11 @@ onMounted(() => {
             @keyup.enter="applyFilters"
             @clear="applyFilters"
           />
-          <el-select v-model="filters.status" placeholder="全部状态" clearable class="filter-select" @change="applyFilters">
+          <el-select v-model="filters.status" placeholder="全部状态" clearable class="filter-select" @change="onStatusChange">
             <el-option label="有效 ACTIVE" value="ACTIVE" />
             <el-option label="已吊销 REVOKED" value="REVOKED" />
           </el-select>
-          <el-select v-model="filters.courseId" placeholder="全部课程" clearable class="filter-select" @change="applyFilters">
+          <el-select v-model="filters.courseId" placeholder="全部课程" clearable class="filter-select" @change="onCourseChange">
             <el-option v-for="course in courses" :key="course.id" :label="course.title" :value="course.id" />
           </el-select>
           <el-select v-model="filters.sortBy" class="filter-select" @change="applyFilters">

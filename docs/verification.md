@@ -171,6 +171,16 @@ Playwright 1.64.1（Chromium 156 headless）对 `http://127.0.0.1:18081` 执行�
 
 界面截图见 `docs/screenshots/`。运行环境没有系统中文字体，因此前端打包了 Noto Sans CJK SC 子集（SIL OFL，许可证随附）；这保证无 CJK 字体的机器也能正确显示。
 
+### 4.1 前端状态回归（2026-10-27 修复后）
+
+针对 review 指出的三个问题补充了 Playwright 回归：
+
+1. **旧请求串租户**：拦截 Alice 的列表响应并延迟 1.2s，在响应到达前切换到 Bob。结果 Bob 列表只含 West 数据，没有 East 行；详情请求延迟后关闭抽屉再切换租户，抽屉保持关闭且不写回旧详情。
+2. **清空筛选发送空参数**：选择课程/状态后再清空，检查最近一次列表请求的 URL：`courseId` 和 `status` 均不再出现，列表恢复完整数据。
+3. **切换租户保留旧课程 ID**：在 Alice 选择 `Safety 101`（courseId=1）后切到 Bob，列表请求不再携带 `courseId`，页面显示 West 的 2 张证书；批量发证弹窗中的课程选择也被清空。
+
+修复方式：所有异步加载统一捕获 `{epoch, token}`，响应落地前同时校验两者；切换租户会中止 me/courses/list/detail/enrollment/submit/revoke/export 的 AbortController，并重置全部筛选条件。列表与 CSV 共用同一个查询构造函数，只发送有效值。浏览器回归与主路径冒烟均通过。
+
 ## 5. 未强制覆盖的边界
 
 - `failed / ISSUANCE_ERROR`：代码使用 savepoint 回滚单学员后继续，但默认数据和常规流程没有可恢复的数据库错误，未构造触发器强制该分支。
