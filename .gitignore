@@ -1,0 +1,16 @@
+# Runtime data (demo / large datasets are generated locally)
+/data/
+
+# Frontend dependencies and build output
+/web/node_modules/
+/web/dist/
+
+# Local binaries and logs
+/certadmin
+/certadmin-*
+*.log
+
+# Editor/OS noise
+.DS_Store
+.idea/
+.vscode/
