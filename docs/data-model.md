@@ -1,6 +1,6 @@
 # 数据模型与演示数据约定
 
-状态：讨论稿 v2。业务状态、命名和生成数据规则已具体化；同库同表已由用户确认，其余字段、约束和生成规则仍待评审。DDL 参考见 [schema.sql](schema.sql)，未接入应用或生成脚本。
+状态：已确认。用户已确认本文的数据模型约定及 [schema.sql](schema.sql) 参考 DDL，包含业务状态、命名、字段、约束和生成数据规则；尚未接入应用或生成脚本。API 契约另见 [API.md](API.md)，已按题目 A1–A7 核对，待最终确认。
 
 ## 1. 持久化与租户隔离
 
@@ -94,7 +94,7 @@ erDiagram
 
 按先检查未完成、再检查已有证书的固定顺序判断；正常数据不会同时有“未完成”和“已有证书”。数据库/事务级故障中止并回滚整个请求，不把它伪装成已提交的逐学员失败结果。未知数据库错误默认按事务级故障处理，只有明确可恢复的错误才允许使用 savepoint 后继续。
 
-返回结果固定按 learner_id ASC 排列。response_json 保存 operationId、courseId、total、issued、skipped、failed 计数及 results 数组；计数和结果必须一致。重试直接回放完整已存结果，不根据当前数据重新计算。
+返回结果固定按 learner_id ASC 排列。response_json 保存 operationId、courseId、total、issued、skipped、failed 计数及 results 数组；每个结果包含 learnerId、learnerName、status、reasonCode、certificateId、serialNumber，计数和结果必须一致。重试直接回放完整已存结果，不根据当前数据重新计算。具体响应结构见 [API.md](API.md)。
 
 ### 逻辑操作与前端状态
 
@@ -124,9 +124,9 @@ DDL 包含以下数据库保证：
 
 在线发证的序列号规则尚未固定，实现时需定义并写入 README。建议使用 `CERT-{tenantCode}-{UUID/ULID}` 这类全局唯一、无需回读的值；种子和 large generator 使用各自确定性前缀，避免与在线格式冲突。
 
-发证事务：权限确认 → BEGIN IMMEDIATE → 查询幂等键/比较请求指纹 → 新请求生成 operation UUID → 逐学员发证与审计 → 写入最终 bulk_operations → COMMIT。证书引用操作的外键延迟到提交检查，因此不需要先写一条处理中操作或占位 JSON。同键不同课程/有效参数返回 409；跨租户课程先返回 404，不创建操作。
+发证事务：权限确认 → BEGIN IMMEDIATE → 查询幂等键/比较请求指纹 → 新请求生成 operation UUID → 逐学员发证与审计 → 写入最终 bulk_operations → COMMIT。证书引用操作的外键延迟到提交检查，因此不需要先写一条处理中操作或占位 JSON。同键不同课程返回 409；跨租户课程先返回 404，不创建操作。
 
-request_json 是校验后、规范化的业务请求，不是原始字节；request_hash 为其 SHA-256。课程及以后任何会改变语义的参数必须参与指纹。重放按 tenant_id 和 actor_admin_id 隔离；body 的字段顺序、空白不改变指纹。未知字段拒绝。规范化规则至少固定 UTF-8 编码、对象键排序、紧凑分隔符、稳定数值表示；idempotency key 必填，作用域为 `tenant_id + actor_admin_id + key`。具体 API 形状下一轮确定。
+request_json 是校验后、规范化的业务请求，不是原始字节；request_hash 为其 SHA-256。当前唯一业务参数是课程，因此规范化请求为 `{"courseId": N}`；后续任何会改变语义的参数必须参与指纹。重放按 tenant_id 和 actor_admin_id 隔离；body 只允许省略/空/`{}`，不承载业务字段，未知字段一律拒绝。规范化规则至少固定 UTF-8 编码、对象键排序、紧凑分隔符、稳定数值表示；idempotency key 必填，作用域为 `tenant_id + actor_admin_id + key`。具体 API 形状见 [API.md](API.md)，仍待最终确认。
 
 首次响应与幂等重放应返回同一份已存结果，避免分别序列化导致结果不一致；可以在事务内生成 response_json，提交后原样返回，重放时也原样返回。
 
@@ -134,7 +134,8 @@ request_json 是校验后、规范化的业务请求，不是原始字节；requ
 
 ## 6. 查询与索引
 
-- 列表与导出使用相同租户范围、姓名/序列号搜索及排序规则，导出不受分页限制。
+- 列表与导出使用相同租户范围、姓名/序列号搜索及排序规则，导出不受分页限制。CSV 固定导出 learnerName、courseTitle、serialNumber、issuedLocalDate 四列，详见 [API.md](API.md)。
+- 列表的 `total` 与当前页 `items` 必须在同一读事务/同一快照内计算；跨页不要求同一快照。
 - 建议首版排序字段：learnerName、serialNumber、issuedLocalDate；统一追加 certificate.id ASC 作为次排序，即使主字段 DESC 也不改变该约定。
 - 索引至少覆盖证书的 `(tenant_id, issued_local_date, id)`、`(tenant_id, serial_number, id)`、`(tenant_id, learner_id, id)`；学员姓名与课程标题有租户前缀索引。
 - `%keyword%` 子串搜索和跨表姓名排序可能扫描/临时排序，不能声称普通索引完全覆盖。十万行的实际查询计划和耗时在实现阶段验证，再决定是否需要优化。
@@ -180,11 +181,11 @@ go run ./cmd/seed-large --db data/large-demo.db --tenant east --certificates 100
 - 输出同名 manifest JSON，记录数据集版本、参数、各租户/表行数、日期分布、`Load Learner 007` 等固定搜索的预期匹配数，供验证器独立对比。
 - 完成后运行 foreign_key_check、integrity_check，以及证书/报名/审计计数一致性检查。`--certificates` 表示目标租户证书总数，不能解释为额外新增行数；小于默认已有数量则报错。
 
-A6 验收使用该库启动服务，对相同搜索和排序导出两次：对照 manifest 的匹配行数、确认全为 East、确认主排序与 ID 次排序、比对两份结果，并在导出期间成功访问列表。生成耗时不混入 CSV 导出耗时。
+A6 验收使用该库启动服务，对相同搜索和排序导出两次：对照 manifest 的匹配行数、确认全为 East、确认主排序与 ID 次排序、比对两份结果，并在导出期间成功访问列表。另注入一次导出中途读取错误，确认浏览器下载失败而不是保存截断文件。生成耗时不混入 CSV 导出耗时。
 
 ## 9. 实施前检查
 
-本草案已提供可执行 DDL 供结构验证；它不是已冻结的迁移。后续实现线程应在真实 Go 驱动上再验证每连接外键、延迟外键、事务锁与重试，再接入 UI。数据生成器和业务服务必须共用模型约束与日期规则。
+已确认的参考 DDL 可执行并已用于结构验证；它尚未接入应用迁移。后续实现线程应在真实 Go 驱动上再验证每连接外键、延迟外键、事务锁与重试，再接入 UI。数据生成器和业务服务必须共用模型约束与日期规则。
 
 本轮通过 Python 标准库在临时磁盘数据库、SQLite 3.45.1 上执行了 15 项模型检查，覆盖跨租户关系拒绝、报名/课程错配、重复证书和审计、非法状态、吊销字段一致性、幂等键唯一性、延迟外键提交/回滚、重复条件吊销、重开数据库后结果保留及 A5 的两个时区样例；foreign_key_check 与 integrity_check 均通过。这些是模型级检查，不代表 Go 实现、HTTP 并发、完整 A1–A7 或十万行性能已通过。
 

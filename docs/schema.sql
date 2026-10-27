@@ -1,4 +1,4 @@
--- Reference schema for docs/data-model.md; proposal, not an application migration.
+-- Confirmed reference schema for docs/data-model.md; not yet an application migration.
 -- Configure WAL/busy_timeout at connection initialization, outside transactions.
 PRAGMA foreign_keys = ON;
 
