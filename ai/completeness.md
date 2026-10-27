@@ -23,14 +23,15 @@
 | `ses_e83a03f94ffe58RDubNXem0S7l` | 08:00–08:35 | REST API 设计与 A1–A7 对照（规划） | `sessions/ses_e83a03f94ffe58RDubNXem0S7l.json` |
 | `ses_e837cb6b6ffeMafvJ2NSUF13hQ` | 08:39–09:06（快照） | 后端、前端、验证与文档实现（本会话） | `sessions/ses_e837cb6b6ffeMafvJ2NSUF13hQ.json` |
 | `ses_e837cac7affeIzJADBnMykgbA7` | 08:39:03–08:39:16 | 子代理：启动连通性检查与仓库扫描 | `sessions/ses_e837cac7affeIzJADBnMykgbA7.json` |
+| `ses_e834e9cb6ffeWcZKgwptGPFdh5` | 09:29–09:34（快照） | 前端旧请求、空筛选参数与租户切换修复及回归 | `sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json` |
 
 索引见 `session-index.csv`；校验和见 `session-checksums.sha256`。
 
 ## 导出限制与缺口
 
 1. **快照边界**：原生导出是命令执行时的快照。导出命令自身、导出后的收尾操作以及本文件最后的编辑不会出现在对应会话 JSON 中；这是导出机制的限制，不是删减。
-2. **本会话仍在继续**：`ses_e837cb6b...` 的 `ended_at` 是最后导出时刻，不代表对话在业务上结束。
-3. **规划会话**：本次评估相关的 4 个规划/准备会话均已导出；OpenCode 中其它项目或其它日期的会话与本题无关，未导出。
+2. **会话仍在继续**：导出是快照；`ended_at` 不代表对话在业务上结束。当前修复会话的导出截止时间见索引。
+3. **规划会话**：本次评估相关的 4 个规划/准备会话、实现会话和修复会话均已导出；OpenCode 中其它项目或其它日期的会话与本题无关，未导出。
 4. **失败运行**：`Codex TUI 启动失败` 会话作为环境失败运行保留，未用于实现决策。
 5. **其它工具**：未使用其它 AI 编码工具。若评审认为终端、编辑器或操作系统层面存在不可导出的自动补全，本仓库无法提供其原生记录；本实现没有依赖此类补全。
 6. **本地路径**：导出文件包含 `/home/charles/code/OceanAI_CertifyCate_Homwork` 等本地路径。未发现真实密钥、密码或私有 token；固定演示 token（`demo-alice-token`、`demo-bob-token`）按设计公开。

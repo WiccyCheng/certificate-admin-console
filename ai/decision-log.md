@@ -105,3 +105,14 @@
 - 拒绝：为了让测试通过而放宽契约；把 `415` 改成 `400`。
 - 证据：`internal/httpapi/handlers.go`、`validation.go`；`TestBulkIdempotencyA2A3A4`、`TestIdempotencyKeyLifecycleAndScope`。
 - 提交：`2df1eee`（修正已在同一实现提交内）。
+
+## D13 前端旧请求、空筛选参数与租户切换
+
+- 背景：用户 review 指出三个前端问题：旧请求返回后可能写入新租户界面；清空筛选后 `undefined`/空值仍被拼进查询串；切换租户后旧 `courseId` 仍参与筛选。
+- 决定：
+  - 每次异步加载捕获 `{epoch, token}`，响应落地前同时校验两者；所有可取消请求（me、courses、list、detail、enrollment、submit、revoke、export）在切换租户时 abort。
+  - 切换租户重置全部筛选条件（含 `courseId`、`q`、`status`、排序和分页），并清空详情/发证弹窗状态。
+  - 列表和 CSV 共用 `filterQuery`：只发送有效正整数 `courseId`、合法 `status`、合法排序；分页参数做范围归一化，CSV 不发送分页。
+- 拒绝：只用 `loading` 标志判断新旧请求（并发下不可靠）；只校验 tenant 名称不校验请求代次；仅在 UI 层把 `courseId` 置空而不修复 API 查询构造（导出路径仍会带空参数）；保留旧筛选再按新租户重新映射（课程 ID 跨租户无意义）。
+- 证据：Playwright 延迟 Alice 列表/详情响应后切换 Bob；清空课程/状态筛选检查 URL；选 East 课程后切 West 检查列表与发证弹窗。结果见 `docs/verification.md` 4.1；`scripts/verify.sh` 通过。
+- 提交：`5b1031e`。
