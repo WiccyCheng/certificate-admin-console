@@ -23,7 +23,7 @@
 | `ses_e83a03f94ffe58RDubNXem0S7l` | 08:00–08:35 | REST API 设计与 A1–A7 对照（规划） | `sessions/ses_e83a03f94ffe58RDubNXem0S7l.json` |
 | `ses_e837cb6b6ffeMafvJ2NSUF13hQ` | 08:39–09:06（快照） | 后端、前端、验证与文档实现（本会话） | `sessions/ses_e837cb6b6ffeMafvJ2NSUF13hQ.json` |
 | `ses_e837cac7affeIzJADBnMykgbA7` | 08:39:03–08:39:16 | 子代理：启动连通性检查与仓库扫描 | `sessions/ses_e837cac7affeIzJADBnMykgbA7.json` |
-| `ses_e834e9cb6ffeWcZKgwptGPFdh5` | 09:29–09:34（快照） | 前端旧请求、空筛选参数与租户切换修复及回归 | `sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json` |
+| `ses_e834e9cb6ffeWcZKgwptGPFdh5` | 09:29–09:43（快照） | 前端旧请求、空筛选参数与租户切换修复及回归 | `sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json` |
 
 索引见 `session-index.csv`；校验和见 `session-checksums.sha256`。
 

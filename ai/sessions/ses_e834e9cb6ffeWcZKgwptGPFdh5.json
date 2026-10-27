@@ -15,19 +15,22 @@
       "providerID": "deepseek",
       "variant": "max"
     },
-    "cost": 0.04243198200000001,
+    "cost": 0.073019832,
     "tokens": {
-      "input": 16141,
-      "output": 10851,
-      "reasoning": 15611,
+      "input": 31716,
+      "output": 22128,
+      "reasoning": 29196,
       "cache": {
-        "read": 8044544,
+        "read": 12489344,
         "write": 0
       }
     },
+    "outcome": "interrupted",
     "time": {
       "created": 1793093362507,
-      "updated": 1793093669986
+      "updated": 1793094193108,
+      "idle": 1793094079224,
+      "viewed": 1793094079224
     },
     "title": "bug修复",
     "location": {
@@ -15670,6 +15673,1291 @@
         "reasoning": 120,
         "cache": {
           "read": 281600,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cb60de3001ksPwanUun37Ek3",
+      "time": {
+        "created": 1793093668333,
+        "streamed": 1793093678621,
+        "completed": 1793093678959
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "Indeed, this is a new session `ses_e834e9cb6ffeWcZKgwptGPFdh5` titled \"bug修复\". The user started a new session for bug fixes. We need export this new session too, add to session index, and re-export at the end. The prior session index rows remain. Good catch.\n\nSo AI records need a new row for `ses_e834e9cb6ffeWcZKgwptGPFdh5`, purpose \"前端三个 bug 修复与回归\". Related commit `5b1031e` + upcoming AI commit. Export after final. Update completeness table.\n\nAlso our re-export just now overwrote main session export with same old content (no change); checksums maybe same? It also updated `session-checksums` (same or new mtimes irrelevant). The new session export not yet in ai/sessions. Need add.\n\nCurrent time 09:34, new session created 09:29. The fix work began at 09:29. Good.\n\nSession index main old session `ended_at` should remain 09:06:32 (not 09:06:01; we had 09:06:01, close but not exact). Could update to 09:06:32. Not critical but accurate. Completeness table old session 08:39–09:06; okay. We should update to 09:06 for consistency. Fine.\n\nNew session export after AI docs writing? We'll export at the very end. First finish D13, docs, then export new session, compute times, add row.\n\nNeed decide session-index row:\n`ses_e834e9cb6ffeWcZKgwptGPFdh5,OpenCode 2,deepseek/deepseek-flash#max,2026-10-27T09:29:22Z,<end>,ai/sessions/...json,前端旧请求/空筛选/租户切换修复与回归,5b1031e;...`\n\nCompleteness table add row.\n\nAlso `ai/README.md` maybe no change.\n\nD13 added. Good.\n\nNow update verification docs already done. Need update `ai/session-index.csv` old main end to 09:06:32 perhaps. Add new row sorted at bottom.\n\nNeed export new session later after all edits. Let's continue:\n- Verify current code still builds/tests (done).\n- Commit docs/decision log? We need commit D13 and AI row after export. We can do one AI commit.\n\nBefore final export, ensure the new session has recorded all tool calls. It will include the fix work. We'll export after writing the AI docs, then update timestamps/checksums, maybe a tiny follow-up edit (index) not in export. Fine.\n\nLet's update session index old end and completeness, add new row placeholder with current time? Better export first to get end time, then write row. But export should happen after docs. Let's write a preliminary new row with end 09:34:26 (current API updated), then export later may update. We can wait until final.\n\nLet's inspect new session info via API to get title/dir/model. It's same model. Good.\n\nNow, are there other new sessions? Only this. Great.\n\nLet's update AI docs:\n- completeness table add new row (times current 09:29–snapshot). We'll fill after export.\n- session index add row.\n\nMaybe do final export after committing code fix? The code fix commit 5b1031e is already made, so the new session export will include it in git log. Good.\n\nLet's add the row now with end 09:34:26 (API updated) and later adjust if export differs. But we still have more work (AI docs edits, commit) which will extend session; final export later. We'll set final after.\n\nLet's wait until the end to edit AI index/table.\n\nNext, do we need to update `docs/verification.md` line count/date? done.\n\nNeed run final `./scripts/verify.sh` after docs only no code; already passed after code. Fine.\n\nNow final AI export: After all code/docs done, export new session, update index and completeness with its end time, checksums, commit AI refresh. The new session export itself will include the AI docs edits up to that point. Then updating index/completeness after export creates a tiny mismatch (not included), acceptable per snapshot note.\n\nBut we need commit D13 and new AI row/checksum. Let's do:\n1. Export new session to ai/sessions.\n2. Recompute checksums.\n3. Get new session end time and message count.\n4. Add row to session-index (new session) and update old main end 09:06:32 if desired.\n5. Add row to completeness table.\n6. Commit all AI changes (D13, new export, checksums, index, completeness) with `chore: record frontend regression session`.\nNo further export needed, though the commit itself won't be in export. Fine.\n\nBefore export, check new session's title \"bug修复\" and content includes all. Export command uses `OPENCODE_SESSION_ID` default if no arg? We can pass explicit. Do.\n\nBut first, maybe we should add a note in `ai/decision-log.md` related to the user's review; done.\n\nLet's export new session now (it includes all work so far, including D13 edit and verification doc, but not the upcoming index edits). Then update.\n\nAlso note session export of new session may include the model's internal reasoning in `content`? The old export included reasoning text (we saw). That's native. Fine.\n\nExport.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793093669988,
+            "completed": 1793093678617
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_00_P6Jdv4AN5iLYVdgpZQPD6401",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "opencode session export ses_e834e9cb6ffeWcZKgwptGPFdh5 > ai/sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json 2>/tmp/opencode/exp-new.err; echo \"exit:$?\"; ls -lh ai/sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json; python3 - <<'PY'\nimport json,datetime\np='ai/sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json'\nj=json.load(open(p)); i=j['info']; t=i['time']\nprint('title',i.get('title'),'model',i['model'],'msgs',len(j['messages']))\nprint('start',datetime.datetime.fromtimestamp(t['created']/1000,datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'))\nprint('end',datetime.datetime.fromtimestamp(t['updated']/1000,datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'))\nPY; grep -iE 'sk-[a-zA-Z0-9]{10,}|AKIA[0-9A-Z]{16}|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY' ai/sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json | head -3; echo scan_done",
+              "timeout": 180000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "/bin/bash: line 8: warning: here-document at line 1 delimited by end-of-file (wanted `PY')\nexit:0\n-rw-r--r-- 1 charles charles 2.0M Oct 27 17:34 ai/sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json\n  File \"<stdin>\", line 7\n    PY; grep -iE 'sk-[a-zA-Z0-9]{10,}|AKIA[0-9A-Z]{16}|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY' ai/sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json | head -3; echo scan_done\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nSyntaxError: invalid syntax\n"
+              },
+              {
+                "type": "text",
+                "text": "Exited with code 1"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 1
+            }
+          },
+          "time": {
+            "created": 1793093677549,
+            "ran": 1793093678620,
+            "completed": 1793093678879
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "8cb270e5a573d28859643847fd36b8a1d2572ef7",
+        "end": "dda52dd757a0c616a8e9393c957c19e0380b2379",
+        "files": [
+          "ai/sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json"
+        ]
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0.001824672,
+      "tokens": {
+        "input": 228,
+        "output": 377,
+        "reasoning": 1194,
+        "cache": {
+          "read": 282624,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cb63780001BDOeX1KmgdnAje",
+      "time": {
+        "created": 1793093678985,
+        "streamed": 1793093680729,
+        "completed": 1793093680805
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "Heredoc syntax error due `PY; grep` on same line. The export succeeded. Rerun metadata/scan separately.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793093679746,
+            "completed": 1793093680724
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_00_bzs1mVtBVUCjA1YHmBo53137",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "python3 - <<'PY'\nimport json,datetime\np='ai/sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json'\nj=json.load(open(p)); i=j['info']; t=i['time']\nprint('title',i.get('title'),'model',i['model'],'msgs',len(j['messages']))\nprint('start',datetime.datetime.fromtimestamp(t['created']/1000,datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'))\nprint('end',datetime.datetime.fromtimestamp(t['updated']/1000,datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'))\nPY\ngrep -iE 'sk-[a-zA-Z0-9]{10,}|AKIA[0-9A-Z]{16}|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY' ai/sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json | head -3; echo scan_done",
+              "timeout": 120000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "title bug修复 model {'id': 'deepseek-flash', 'providerID': 'deepseek', 'variant': 'max'} msgs 176\nstart 2026-10-27T09:29:22Z\nend 2026-10-27T09:34:29Z\nscan_done\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1793093679980,
+            "ran": 1793093680727,
+            "completed": 1793093680791
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "dda52dd757a0c616a8e9393c957c19e0380b2379",
+        "end": "dda52dd757a0c616a8e9393c957c19e0380b2379",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0.001075098,
+      "tokens": {
+        "input": 211,
+        "output": 290,
+        "reasoning": 27,
+        "cache": {
+          "read": 284416,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cb63eb5001Fyv8CVWttoCXqH",
+      "time": {
+        "created": 1793093680829,
+        "streamed": 1793093686275,
+        "completed": 1793093686400
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "New session export 2.0MB, 176 messages, 09:29:22–09:34:29. Great.\n\nNow update session index:\n- old main end currently 09:06:01; actual export 09:06:32. Update.\n- add new row.\n- old main related commits add 5b1031e? 5b1031e is in the new session, not old. The old main session related commits should not include 5b1031e. It currently includes 2df1eee;b92344a;bbe4ba1;5020f5d;761dbe6. That's fine. Don't add.\n- New row related commits `5b1031e` plus AI commit unknown. Use `5b1031e`.\nCompleteness table:\n- old main end 09:06 (already).\n- add new row: `ses_e834e9...` 09:29–09:34（快照）, purpose frontend bug fix, file.\n- text \"本次评估相关的 4 个规划/准备会话...\" now plus new fix session; phrase \"相关会话均已导出\". Update item 3 maybe.\n- Add note that two implementation sessions: original and bugfix.\n- \"已导出的原生会话\" table now 7 rows.\n- `session-checksums` recompute.\n\nAlso `ai/README.md` no changes.\n\nLet's edit.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793093682206,
+            "completed": 1793093686265
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_00_WqcIPiquTvHkT8gFqF7A9495",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "python3 - <<'PY'\nfrom pathlib import Path\np=Path('ai/session-index.csv'); s=p.read_text()\ns=s.replace('2026-10-27T08:39:01Z,2026-10-27T09:04:17Z','2026-10-27T08:39:01Z,2026-10-27T09:06:32Z')\ns=s.rstrip('\\n')+'\\nses_e834e9cb6ffeWcZKgwptGPFdh5,OpenCode 2,deepseek/deepseek-flash#max,2026-10-27T09:29:22Z,2026-10-27T09:34:29Z,ai/sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json,前端旧请求/空筛选/租户切换修复与回归,5b1031e\\n'\np.write_text(s)\n\np=Path('ai/completeness.md'); s=p.read_text()\ns=s.replace('| `ses_e837cac7affeIzJADBnMykgbA7` | 08:39:03–08:39:16 | 子代理：启动连通性检查与仓库扫描 | `sessions/ses_e837cac7affeIzJADBnMykgbA7.json` |',\n'''| `ses_e837cac7affeIzJADBnMykgbA7` | 08:39:03–08:39:16 | 子代理：启动连通性检查与仓库扫描 | `sessions/ses_e837cac7affeIzJADBnMykgbA7.json` |\n| `ses_e834e9cb6ffeWcZKgwptGPFdh5` | 09:29–09:34（快照） | 前端旧请求、空筛选参数与租户切换修复及回归 | `sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json` |''')\ns=s.replace('本次评估相关的 4 个规划/准备会话均已导出；OpenCode 中其它项目或其它日期的会话与本题无关，未导出。',\n            '本次评估相关的 4 个规划/准备会话、实现会话和修复会话均已导出；OpenCode 中其它项目或其它日期的会话与本题无关，未导出。')\ns=s.replace('2. **本会话仍在继续**：`ses_e837cb6b...` 的 `ended_at` 是最后导出时刻，不代表对话在业务上结束。',\n            '2. **会话仍在继续**：导出是快照；`ended_at` 不代表对话在业务上结束。当前修复会话的导出截止时间见索引。')\np.write_text(s)\nPY\ncd ai && sha256sum sessions/*.json > session-checksums.sha256 && python3 - <<'PY'\nimport csv,glob\nrows=list(csv.reader(open('session-index.csv')))\nprint('rows',len(rows),'cols',{len(r) for r in rows})\nprint('exports',len(glob.glob('sessions/*.json')))\nPY\nsha256sum -c session-checksums.sha256 | tail -3",
+              "timeout": 120000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "rows 8 cols {8}\nexports 7\nsessions/ses_e83b56706ffeQp37rqQjjsiYhs.json: OK\nsessions/ses_e83c45577ffe7XVpJjicbHpDmr.json: OK\nsessions/ses_e83cd1e1cffef3FhZAslzNsT6t.json: OK\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1793093683972,
+            "ran": 1793093686270,
+            "completed": 1793093686354
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "dda52dd757a0c616a8e9393c957c19e0380b2379",
+        "end": "30355592f4161882d47ec97a7e23aeb3f7541e9e",
+        "files": [
+          "ai/completeness.md",
+          "ai/session-checksums.sha256",
+          "ai/session-index.csv"
+        ]
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0.0015251999999999998,
+      "tokens": {
+        "input": 224,
+        "output": 760,
+        "reasoning": 302,
+        "cache": {
+          "read": 284800,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cb65490001s7w5jh2qAC79fo",
+      "time": {
+        "created": 1793093686425,
+        "streamed": 1793093688022,
+        "completed": 1793093688065
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "Check the completeness replacement worked and table formatting.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793093687524,
+            "completed": 1793093688016
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_00_s5RwFiXYA25h7dyeC1Ta1543",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "sed -n '18,38p' ai/completeness.md; echo ---; tail -4 ai/session-index.csv; echo ---; git status --short"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "| 会话 | 时间 | 用途 | 文件 |\n| --- | --- | --- | --- |\n| `ses_e83cd1e1cffef3FhZAslzNsT6t` | 07:11–07:53 | 数据模型与任务状态机审查（规划） | `sessions/ses_e83cd1e1cffef3FhZAslzNsT6t.json` |\n| `ses_e83c45577ffe7XVpJjicbHpDmr` | 07:20–08:37 | chore worker：仓库准备与文档提交 | `sessions/ses_e83c45577ffe7XVpJjicbHpDmr.json` |\n| `ses_e83b56706ffeQp37rqQjjsiYhs` | 07:37–07:52 | Codex TUI 启动失败排查（环境失败运行，未参与实现） | `sessions/ses_e83b56706ffeQp37rqQjjsiYhs.json` |\n| `ses_e83a03f94ffe58RDubNXem0S7l` | 08:00–08:35 | REST API 设计与 A1–A7 对照（规划） | `sessions/ses_e83a03f94ffe58RDubNXem0S7l.json` |\n| `ses_e837cb6b6ffeMafvJ2NSUF13hQ` | 08:39–09:06（快照） | 后端、前端、验证与文档实现（本会话） | `sessions/ses_e837cb6b6ffeMafvJ2NSUF13hQ.json` |\n| `ses_e837cac7affeIzJADBnMykgbA7` | 08:39:03–08:39:16 | 子代理：启动连通性检查与仓库扫描 | `sessions/ses_e837cac7affeIzJADBnMykgbA7.json` |\n| `ses_e834e9cb6ffeWcZKgwptGPFdh5` | 09:29–09:34（快照） | 前端旧请求、空筛选参数与租户切换修复及回归 | `sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json` |\n\n索引见 `session-index.csv`；校验和见 `session-checksums.sha256`。\n\n## 导出限制与缺口\n\n1. **快照边界**：原生导出是命令执行时的快照。导出命令自身、导出后的收尾操作以及本文件最后的编辑不会出现在对应会话 JSON 中；这是导出机制的限制，不是删减。\n2. **会话仍在继续**：导出是快照；`ended_at` 不代表对话在业务上结束。当前修复会话的导出截止时间见索引。\n3. **规划会话**：本次评估相关的 4 个规划/准备会话、实现会话和修复会话均已导出；OpenCode 中其它项目或其它日期的会话与本题无关，未导出。\n4. **失败运行**：`Codex TUI 启动失败` 会话作为环境失败运行保留，未用于实现决策。\n5. **其它工具**：未使用其它 AI 编码工具。若评审认为终端、编辑器或操作系统层面存在不可导出的自动补全，本仓库无法提供其原生记录；本实现没有依赖此类补全。\n6. **本地路径**：导出文件包含 `/home/charles/code/OceanAI_CertifyCate_Homwork` 等本地路径。未发现真实密钥、密码或私有 token；固定演示 token（`demo-alice-token`、`demo-bob-token`）按设计公开。\n7. **独立书面题**：本仓库不包含第 6 节独立书面题的 AI 代写内容；该部分应由候选人本人完成并单独声明。\n---\nses_e83a03f94ffe58RDubNXem0S7l,OpenCode 2,deepseek/deepseek-flash#max,2026-10-27T08:00:12Z,2026-10-27T08:35:46Z,ai/sessions/ses_e83a03f94ffe58RDubNXem0S7l.json,REST API 设计与 A1–A7 对照（规划）,a119226\nses_e837cb6b6ffeMafvJ2NSUF13hQ,OpenCode 2,deepseek/deepseek-flash#max,2026-10-27T08:39:01Z,2026-10-27T09:06:01Z,ai/sessions/ses_e837cb6b6ffeMafvJ2NSUF13hQ.json,实现后端、前端、验证与交付文档（本会话）,2df1eee;b92344a;bbe4ba1;5020f5d;761dbe6\nses_e837cac7affeIzJADBnMykgbA7,OpenCode 2,deepseek/deepseek-flash#max,2026-10-27T08:39:03Z,2026-10-27T08:39:16Z,ai/sessions/ses_e837cac7affeIzJADBnMykgbA7.json,子代理：启动连通性检查与仓库状态扫描,\nses_e834e9cb6ffeWcZKgwptGPFdh5,OpenCode 2,deepseek/deepseek-flash#max,2026-10-27T09:29:22Z,2026-10-27T09:34:29Z,ai/sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json,前端旧请求/空筛选/租户切换修复与回归,5b1031e\n---\n M ai/completeness.md\n M ai/decision-log.md\n M ai/session-checksums.sha256\n M ai/session-index.csv\n M ai/sessions/ses_e837cb6b6ffeMafvJ2NSUF13hQ.json\n?? ai/sessions/ses_e834e9cb6ffeWcZKgwptGPFdh5.json\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1793093687922,
+            "ran": 1793093688020,
+            "completed": 1793093688051
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "30355592f4161882d47ec97a7e23aeb3f7541e9e",
+        "end": "30355592f4161882d47ec97a7e23aeb3f7541e9e",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0.000940356,
+      "tokens": {
+        "input": 234,
+        "output": 70,
+        "reasoning": 9,
+        "cache": {
+          "read": 285952,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cb65b11001LTLnqAiAM6RxZs",
+      "time": {
+        "created": 1793093688089,
+        "streamed": 1793093690467,
+        "completed": 1793093690540
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "The replacement of old main end to 09:06:32 didn't happen because the file had 09:06:01? Wait output shows 09:06:01 still. Our python replace targeted `2026-10-27T08:39:01Z,2026-10-27T09:04:17Z` but earlier we had updated to 09:06:01, so replace didn't match. Need update old main end to 09:06:32. Do separately.\n\nAlso `ai/sessions/ses_e837cb...json` modified (re-export) even though content maybe same? The export likely includes no new messages but metadata updated? It may have changed due serialization. Fine; commit.\n\nUpdate old main end.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793093689226,
+            "completed": 1793093690464
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_00_efUQGiGeByJgQDsgkFpW3636",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "python3 - <<'PY'\nfrom pathlib import Path\np=Path('ai/session-index.csv'); s=p.read_text().replace('2026-10-27T08:39:01Z,2026-10-27T09:06:01Z','2026-10-27T08:39:01Z,2026-10-27T09:06:32Z')\np.write_text(s)\nPY\ngrep 'ses_e837cb6b6ffeMafvJ2NSUF13hQ' ai/session-index.csv"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "ses_e837cb6b6ffeMafvJ2NSUF13hQ,OpenCode 2,deepseek/deepseek-flash#max,2026-10-27T08:39:01Z,2026-10-27T09:06:32Z,ai/sessions/ses_e837cb6b6ffeMafvJ2NSUF13hQ.json,实现后端、前端、验证与交付文档（本会话）,2df1eee;b92344a;bbe4ba1;5020f5d;761dbe6\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1793093690050,
+            "ran": 1793093690466,
+            "completed": 1793093690505
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "30355592f4161882d47ec97a7e23aeb3f7541e9e",
+        "end": "10950dc8e6fc61f04e884ad027291f848b7d2406",
+        "files": [
+          "ai/session-index.csv"
+        ]
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0.0012637739999999998,
+      "tokens": {
+        "input": 1437,
+        "output": 157,
+        "reasoning": 159,
+        "cache": {
+          "read": 286208,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cb664bc00183MF77vnUMNe5u",
+      "time": {
+        "created": 1793093690565,
+        "streamed": 1793093693223,
+        "completed": 1793093693339
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "Now checksums file was computed before index edits (index not in checksums), fine. It includes 7 session files. Verify all. Done.\n\nCommit AI records for the fix session. But before commit, consider adding D13's related commit and session row; yes.\n\nCommit:\n`chore: record frontend regression session and decisions`.\n\nThen final git status/log. Also maybe update README known limitations? No.\n\nOne more thing: Should the new session export include the final commit of AI records? No; snapshot before. Fine.\n\nRun `git add ai && git commit`.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793093691740,
+            "completed": 1793093693201
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_00_TpeWtioMbt5QzUFIwBlT0713",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "cd ai && sha256sum -c session-checksums.sha256 >/tmp/opencode/checksum.log 2>&1; echo \"checksum_exit:$?\"; cd ..; git add ai && git commit -q -m \"chore: record frontend regression session and decisions\" && git log --oneline -4; echo ---; git status --short",
+              "timeout": 120000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "checksum_exit:0\n3ed6411 chore: record frontend regression session and decisions\n5b1031e fix(web): guard stale responses and normalize tenant filters\nbb64d8e chore: refresh AI session exports and checksums\n761dbe6 fix: tighten API routing, CSV whitespace quoting and large dataset checks\n---\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1793093692827,
+            "ran": 1793093693221,
+            "completed": 1793093693329
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "10950dc8e6fc61f04e884ad027291f848b7d2406",
+        "end": "10950dc8e6fc61f04e884ad027291f848b7d2406",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0.001049016,
+      "tokens": {
+        "input": 228,
+        "output": 134,
+        "reasoning": 118,
+        "cache": {
+          "read": 287872,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cb66fae001LyiddvtNo5YejZ",
+      "time": {
+        "created": 1793093693369,
+        "streamed": 1793093701278,
+        "completed": 1793093701298
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "Working tree clean.\n\nNow final response to user: summarize the three fixes, how each addressed, tests. Should be concise. Mention commit 5b1031e, verification. Maybe list code changes:\n1. RequestContext `{epoch, token}` + abort controllers for me/courses/list/detail/enrollment/submit/revoke/export; all async response assignments guarded; switch resets state.\n2. `filterQuery` shared by list/CSV only emits valid values; handles `''`, undefined, null, NaN; paging normalization; App change handlers normalize clear.\n3. switchActor resets all filters incl courseId and issue course; tests.\n\nMention Playwright regression scenarios and that main smoke still passes. Mention files changed. Maybe note `./scripts/verify.sh` passed.\n\nNo need to mention AI records details maybe one line: new session exported and indexed.\n\nEnsure not to claim old bug existed beyond user report; we fixed.\n\nLet's formulate in Chinese.\n\nAlso perhaps note that the detail drawer overlay prevents clicking actor switch while open, but we still guard detail. Not necessary.\n\nFinal answer with short headings.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793093697449,
+            "completed": 1793093701272
+          }
+        },
+        {
+          "type": "text",
+          "text": "三个前端问题都已修复，提交为 `5b1031e`。\n\n## 修复内容\n\n1. **旧请求串租户**\n   - 引入统一的请求上下文 `{ epoch, token }`，所有异步响应写入界面前同时校验代次和当前 token。\n   - 切换租户时会中止 `me`、`courses`、列表、详情、报名、批量发证、吊销、CSV 导出的请求。\n   - 覆盖了之前遗漏的 `reloadDetail`、`submitIssue`、`revoke`、`downloadCsv`。\n\n2. **清空筛选后发送空参数**\n   - 列表和 CSV 改为共用同一个 `filterQuery`。\n   - 只有合法正整数 `courseId` 和合法 `status` 才会写入查询串；`undefined`、`null`、`''`、`NaN` 全部忽略。\n   - 课程/状态选择框的 `change` 事件也会把清空值归一化，避免 UI 状态里残留空字符串。\n   - 分页参数同时做了范围归一化。\n\n3. **切换租户保留旧课程 ID**\n   - `switchActor` 现在会重置全部筛选条件（包括 `courseId`、`q`、`status`、排序、分页）。\n   - 批量发证弹窗里的 `issueCourseId` 也会清空，不会把 East 的课程 ID 带到 West。\n\n## 验证\n\n用 Playwright 补了针对性的回归场景：\n\n- 延迟 Alice 列表响应 1.2s，期间切到 Bob，Bob 界面不出现 East 数据。\n- 选择课程/状态后再清空，检查请求 URL 中不再出现 `courseId` 或空 `status`。\n- 在 East 选中 `Safety 101` 后切到 West，列表请求不带 `courseId`，并正常显示 West 的 2 张证书。\n- 延迟详情响应后关闭抽屉并切换租户，旧详情不会重新出现。\n- 切换租户后重新打开批量发证弹窗，课程选择为空。\n\n原有主路径冒烟（actor 切换、详情 A5、批量发证、CSV 下载）也仍然通过，`./scripts/verify.sh` 通过。相关说明已补到 `docs/verification.md` 4.1 和 `ai/decision-log.md` D13。"
+        }
+      ],
+      "snapshot": {
+        "start": "10950dc8e6fc61f04e884ad027291f848b7d2406",
+        "end": "10950dc8e6fc61f04e884ad027291f848b7d2406",
+        "files": []
+      },
+      "finish": "stop",
+      "rawFinish": "stop",
+      "cost": 0.001341318,
+      "tokens": {
+        "input": 181,
+        "output": 518,
+        "reasoning": 231,
+        "cache": {
+          "read": 288256,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cb68eb4001rcfRiortEkKrhr",
+      "time": {
+        "created": 1793093701300
+      },
+      "type": "idle",
+      "outcome": "succeeded"
+    },
+    {
+      "id": "msg_17cb7d32800101Pdv2c7glvvan",
+      "time": {
+        "created": 1793093784427
+      },
+      "text": "README with one-command startup, actor tokens or headers, A1 to A7 reproduction steps,\n100,000-row generation, known defects, and unfinished work.\n我看reademe目前应该是不符合要求的？",
+      "files": [],
+      "agents": [],
+      "type": "user"
+    },
+    {
+      "id": "msg_17cb7d37e0019GXqf1OtS1gyea",
+      "time": {
+        "created": 1793093784463,
+        "completed": 1793093787392
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [],
+      "snapshot": {
+        "start": "10950dc8e6fc61f04e884ad027291f848b7d2406",
+        "end": "10950dc8e6fc61f04e884ad027291f848b7d2406",
+        "files": []
+      },
+      "finish": "error",
+      "error": {
+        "type": "aborted",
+        "message": "Step interrupted"
+      }
+    },
+    {
+      "id": "msg_17cb7df04001Mj6P9yM4Da4Cy2",
+      "time": {
+        "created": 1793093787396
+      },
+      "type": "idle",
+      "outcome": "interrupted"
+    },
+    {
+      "id": "msg_17cbc4fb6001njoHxUZZoinWrB",
+      "time": {
+        "created": 1793094078465
+      },
+      "text": "推送下第一版",
+      "files": [],
+      "agents": [],
+      "type": "user"
+    },
+    {
+      "id": "msg_17cbc5014001Zfb0PMheRf82xE",
+      "time": {
+        "created": 1793094078503,
+        "completed": 1793094079220
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [],
+      "snapshot": {
+        "start": "10950dc8e6fc61f04e884ad027291f848b7d2406",
+        "end": "10950dc8e6fc61f04e884ad027291f848b7d2406",
+        "files": []
+      },
+      "finish": "error",
+      "error": {
+        "type": "aborted",
+        "message": "Step interrupted"
+      }
+    },
+    {
+      "id": "msg_17cbc52f8001G5xY2A2ywQRCXg",
+      "time": {
+        "created": 1793094079224
+      },
+      "type": "idle",
+      "outcome": "interrupted"
+    },
+    {
+      "id": "msg_17cbc59660018tNVx4w4sdDrgK",
+      "time": {
+        "created": 1793094080919
+      },
+      "text": "README with one-command startup, actor tokens or headers, A1 to A7 reproduction steps,\n100,000-row generation, known defects, and unfinished work.\n我看reademe目前应该是不符合要求的？",
+      "files": [],
+      "agents": [],
+      "type": "user"
+    },
+    {
+      "id": "msg_17cbc59a5001eI1yNOZvXrzj2z",
+      "time": {
+        "created": 1793094080945,
+        "streamed": 1793094091860,
+        "completed": 1793094091906
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "The user says README currently doesn't meet requirements: one-command startup, actor tokens or headers, A1–A7 reproduction steps, 100,000-row generation, known defects, and unfinished work. They ask \"推送下第一版\" = push the first version. They think README may not meet requirements. Need update README to explicitly include all required sections, especially A1–A7 reproduction steps (currently it has a test mapping table but not manual reproduction steps with curl/UI), known defects and unfinished work (currently \"known limitations\" but not \"unfinished work\" perhaps). Also need \"push first version\" — presumably commit and push to remote. Check git remote. We need modify README, maybe docs. Then commit and push.\n\nLet's review current README. We have it. Need add:\n- One-command startup: exists, but maybe should be prominent and explain exactly `./scripts/run.sh`; include prerequisites and first run. Already.\n- Actor tokens or headers: exists demo token table. Perhaps include exact curl header examples.\n- A1–A7 reproduction steps: current table maps tests, but no step-by-step manual reproduction. Need add explicit steps per scenario, with UI and/or curl commands. This is the main gap.\n- 100,000-row generation: exists but maybe add exact startup with large DB and verification commands. Include generation and service start, expected counts. Already partly. Could expand.\n- Known defects: current \"已知限制与取舍\" but need explicit \"Known defects\" (actual defects) separate from design tradeoffs.\n- Unfinished work: missing. Add a section \"未完成工作\" listing optional endpoints, async bulk, failed branch test, 503 test, prior AI sessions? etc.\n\nAlso README in English or Chinese? User wrote English bullet list, but Chinese conversation. The assessment might be English; README currently Chinese. They might want it to match the requirement. Could keep Chinese with English headings? The user's request is about content, not language. But \"README with ...\" suggests the README should clearly cover these. We can make it bilingual? That'd be long. Maybe restructure README with a top \"Quick start\" and explicit sections, in Chinese (consistent with repo docs). The assessment instructions likely in English; maybe an English README would be safer. But the user speaks Chinese; they likely evaluate content, not language. The task PDF is English. Hmm.\n\n\"推送下第一版\" means push the first version. Maybe they want to publish to GitHub. Need check remote and branch. `git remote -v`, `git status`, branch. Then push. If no remote, ask? Let's check. Also the user's message repeats the requirement; maybe the README should be rewritten to explicitly follow that list.\n\nPlan:\n1. Inspect README and remote.\n2. Rewrite README structure:\n   - Title, one-line summary, stack.\n   - **Quick start (one command)** with exact commands, prerequisites, reset, dev mode.\n   - **Actors and authorization** table tokens + curl header example; note tenant via token.\n   - **A1–A7 reproduction** — explicit step-by-step for each, with UI path and curl commands. Use real IDs from seed and expected outputs. Need careful ordering/reset notes. A1: switch Alice/Bob, cross-tenant 404, list filter, CSV. A2: bulk issue with key, replay same key, check counts; reset note. A3: same key different course 409. A4: results. A5: detail East/West local time. A6: generate large DB, start on :8081, time export, compare sha, list during export. A7: revoke Taylor, repeat 200, check audit? No audit API; can verify via UI/detail or sqlite CLI absent. Could use API detail and maybe a test. Manual reproduction can use `go test -run TestRevocationA7`. Better include both UI/curl and test command.\n   - Each step should be reproducible from a fresh default DB; note reset before A2/A7 ordering. Provide a script? We could add `scripts/demo.sh` to automate A1–A7? That would be nice but maybe not necessary. Could add `scripts/acceptance.sh` using curl/jq? `jq` is not installed (we saw earlier no jq). Use Python or plain curl + grep. But README steps enough.\n   - **100,000-row generation** exact commands, expected manifest/counts, performance, A6 reproduction.\n   - **Testing** `./scripts/verify.sh`, test mapping.\n   - **Known defects** (real defects/limitations).\n   - **Unfinished work** (explicit list).\n   - **Project structure**, **AI records**, **commits** maybe.\n3. Ensure no false claims. Known defects:\n   - `failed/ISSUANCE_ERROR` branch not naturally triggered/tested; but code implemented. Is that a defect? It's a test gap, not defect. Known defects could include:\n     - CSV no BOM (Excel compatibility) — design choice/limitation.\n     - Frontend bundle size warning (1MB).\n     - No optional endpoints.\n     - Sync bulk only.\n     - SQLite single host.\n     - Idempotency key lost when closing issue dialog after ambiguous 500/503 (important known defect). We noted in decision log. This is a real defect: if request committed but response lost, closing dialog and reopening loses key, new operation; server unique constraints prevent duplicate certs but creates extra bulk operation. Mention.\n     - Default demo has one ACTIVE cert per tenant; running A7 then A2 requires reset; not a defect but operational.\n     - No real auth.\n     - No audit query API (by design).\n     - The `failed` branch lacks an E2E fixture (unfinished verification).\n     - `503` busy path not forced in tests.\n   - Unfinished work:\n     - Per-learner `failed` scenario fixture/test.\n     - 503 busy test.\n     - Optional endpoints `GET /learners`, `GET /bulk-operations/{id}`.\n     - Async bulk/queue (out of scope).\n     - Real auth/login (out of scope).\n     - CSV BOM option (out of scope).\n     - Manual UI accessibility/keyboard navigation.\n     - Prior planning sessions? They are exported now, no.\n     - The task PDF isn't in repo; no.\n     - \"独立书面题\" not included (not part of implementation; candidate must complete). Mention as unfinished/out-of-scope.\n4. Verify README commands by running some? We can test key curl steps against a fresh server. We should ensure IDs/results accurate. Add `curl` examples with `--noproxy`? No, user environment normal; don't include proxy flag. Use `http://localhost:8080`.\n5. Commit and push. Check remote. If no remote, ask user. Let's check first.\n\nAlso the user says \"推送下第一版\" — likely means push the first version to remote. We need check `git remote -v`.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793094082480,
+            "completed": 1793094091853
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_00_ZYpgCWgRHILFL8jD7OJK4158",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "git remote -v; echo ---; git branch -vv; echo ---; git status --short; echo ---; sed -n '1,220p' README.md"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "origin\thttps://github.com/WiccyCheng/certificate-admin-console.git (fetch)\norigin\thttps://github.com/WiccyCheng/certificate-admin-console.git (push)\n---\n* master 3ed6411 [origin/master] chore: record frontend regression session and decisions\n---\n---\n# Certificate Admin Console\n\n多租户证书管理后台，按 `docs/` 中已冻结的架构、数据模型和 API 契约实现。覆盖证书列表、详情、课程批量发证、吊销、CSV 导出，以及 A1–A7 验收场景。\n\n- 后端：Go 1.22.5 + Gin 1.10.0 + SQLite（`modernc.org/sqlite` 1.34.5，纯 Go，无 CGO）\n- 前端：Vue 3 + TypeScript + Vite 8 + Element Plus\n- 运行形态：单个 Go 进程同时提供 `/api/v1` 和构建后的前端静态文件\n- 数据：SQLite WAL，独立写连接 + 多读连接；默认库 `data/demo.db`\n\n## 快速启动\n\n环境要求：Go 1.22.5、Node.js 20.19+（实测 24.3.0）、npm。\n\n```bash\n./scripts/run.sh\n# 打开 http://localhost:8080\n```\n\n首次运行会安装前端依赖（若 `web/node_modules` 不存在）、构建前端、创建并初始化 `data/demo.db`。重复启动不会重置已有数据。\n\n```bash\n# 换端口或换库\nADDR=:8081 ./scripts/run.sh\nDB=data/another.db ./scripts/run.sh\n```\n\n演示身份（前端右上角切换，后端只信 Bearer token）：\n\n| actor | token | 租户 | 时区 |\n| --- | --- | --- | --- |\n| alice@east.test | `demo-alice-token` | East | `Australia/Sydney` |\n| bob@west.test | `demo-bob-token` | West | `Australia/Perth` |\n\n重置默认库（先停止服务）：\n\n```bash\nrm -rf data/demo.db*\n```\n\n开发模式：\n\n```bash\ngo run ./cmd/server --db data/demo.db --addr :8080\n# 另一个终端\ncd web && npm run dev   # http://localhost:5173，/api 代理到 :8080\n```\n\n## 功能与接口\n\n| 方法 | 路径（省略 `/api/v1`） | 说明 |\n| --- | --- | --- |\n| GET | `/me` | 当前管理员、租户、时区 |\n| GET | `/courses` | 本租户课程选项 |\n| GET | `/courses/{courseId}/enrollments` | 课程报名、完成状态、证书、发证资格 |\n| GET | `/learners/{learnerId}/enrollments` | 学员各课程报名 |\n| GET | `/certificates` | 搜索、筛选、排序、分页 |\n| GET | `/certificates/{id}` | 详情（UTC、本地时间、本地日期、发证/吊销人） |\n| POST | `/courses/{id}/bulk-operations` | 同步批量发证，必须带 `Idempotency-Key` |\n| PUT | `/certificates/{id}/revocation` | 吊销；重复请求幂等 |\n| GET | `/certificates.csv` | 流式 CSV，复用列表的筛选与排序 |\n\n完整契约见 [docs/API.md](docs/API.md)，数据模型见 [docs/data-model.md](docs/data-model.md)。\n\n## 界面\n\n| 证书列表 | 批量发证与逐学员结果 |\n| --- | --- |\n| ![证书列表](docs/screenshots/list.png) | ![批量发证](docs/screenshots/bulk-issue.png) |\n\n| 证书详情（A5 本地时间） |\n| --- |\n| ![证书详情](docs/screenshots/detail.png) |\n\n### 关键语义\n\n- **租户隔离**：tenant 只由 token 解析，客户端提交 `tenantId` 返回 `400`，`X-Tenant-Id` 被忽略。跨租户路径资源统一 `404`，列表/CSV 过滤返回空结果。\n- **批量发证幂等**：作用域 `tenant + admin + key`。同键同课程返回已存结果（`200`），同键不同课程返回 `409`；首次提交 `201`。并发同键由写事务串行化，只产生一个逻辑结果。\n- **吊销**：`ACTIVE → REVOKED` 首次 `201`，重复 `200` 且不新增审计；吊销是终态，本题不重发。\n- **时间**：数据库存 UTC `YYYY-MM-DDTHH:mm:ss.SSSZ`；`issuedLocalDate` / `issuedLocalAt` 由租户 IANA 时区派生，不使用浏览器时区。\n- **搜索**：学员姓名或序列号的字面子串，ASCII 不区分大小写，`%` / `_` 为普通字符。\n- **CSV**：固定四列、CRLF、UTF-8 无 BOM、公式注入防护；流式写出，中途读取错误会中止连接而不是保存截断文件。\n\n### 序列号规则\n\n| 来源 | 格式 | 示例 |\n| --- | --- | --- |\n| 在线发证 | `CERT-{TENANT_CODE}-{ULID}`（26 位 Crockford Base32） | `CERT-EAST-01M5Y8QM77F49S7Y0A5T1MC0DX` |\n| 默认种子 | `CERT-{TENANT}-{NAME}-0001` | `CERT-EAST-TAYLOR-0001` |\n| 大数据生成器 | `{TENANT}-LOAD-{i:06d}` | `EAST-LOAD-000007` |\n\n三类前缀互不冲突；在线序列号时间有序且无需回读。\n\n## 默认演示数据\n\n每个租户 2 门课程、4 位学员、5 条报名、2 张证书、3 条审计；两租户合计 4 门课程、8 位学员、10 条报名、4 张证书、6 条审计。\n\n| 学员 | 课程 | 完成状态 | 初始证书 |\n| --- | --- | --- | --- |\n| Alex Lee | Safety 101 | COMPLETED | 无 |\n| Sam Chen | Safety 101 | INCOMPLETE | 无 |\n| Taylor Kim | Safety 101 | COMPLETED | ACTIVE |\n| Morgan Wu | Safety 101 | COMPLETED | REVOKED |\n| Alex Lee（同一人） | First Aid | COMPLETED | 无 |\n\nTaylor 的 `issued_at` 为 `2026-01-10T13:30:00.000Z`：East 展示 `2026-01-11T00:30:00.000+11:00`，West 展示 `2026-01-10T21:30:00.000+08:00`。\n\n注意：每个租户初始只有 Taylor 一张 ACTIVE 证书。若在同一默认库先执行 A7 吊销，再执行 A2 批量发证，Alex 仍会被发证；若要先演示 A2 再演示 A7，请重置默认库或先给其他学员发证。\n\n## 100,000 行大数据集\n\n生成器使用独立数据库，不污染默认库；目标文件已存在时拒绝执行。\n\n```bash\nrm -f data/large-demo.db* data/large-demo.manifest.json\n./scripts/seed-large.sh                    # 默认 data/large-demo.db\nADDR=:8081 DB=data/large-demo.db ./scripts/run.sh\n```\n\n等价的显式命令：\n\n```bash\ngo run ./cmd/seed-large --db data/large-demo.db --tenant east --certificates 100000\n```\n\n结果：East 共 100,000 张证书（含默认 2 张），West 保持 2 张；新增课程 `Export Load`、99,998 位学员、报名、ACTIVE 证书和 ISSUED 审计。生成后执行 `foreign_key_check`、`integrity_check` 和证书/审计一致性检查，并写入 `data/large-demo.manifest.json`。\n\n## 验证\n\n```bash\n./scripts/verify.sh     # gofmt 检查 + go vet + go test -race ./... + 前端构建\n```\n\nA1–A7 自动化覆盖：\n\n| 场景 | 测试 | 验证内容 |\n| --- | --- | --- |\n| A1 租户隔离 | `TestTenantIsolationA1` | 跨租户 404、列表/CSV 空结果、`tenantId` 400、`X-Tenant-Id` 忽略、跨租户 bulk 无副作用 |\n| A2 重试安全 | `TestBulkIdempotencyA2A3A4`、`TestBulkConcurrentSameKeyA2`、`TestIdempotencyKeyLifecycleAndScope` | 同键同课程 `200` 原样回放；8 并发只发一张证书；失败请求不消耗键 |\n| A3 键误用 | `TestBulkIdempotencyA2A3A4` | 同键不同课程 `409`，不覆盖、不二次执行 |\n| A4 学员结果 | `TestEnrollmentEligibilityA4`、`TestBulkIdempotencyA2A3A4` | `issued` / `skipped` 及三种原因、按 `learnerId ASC`、计数不变量 |\n| A5 DST 与本地日期 | `TestTimeAndLocalDateA5` | East/West 本地时间、本地日期、默认排序与次排序 |\n| A6 导出 | `TestCSVExportA6`、`TestCSVAbortOnMidStreamError` | 四列/CRLF/空结果/筛选/重复导出一致/中途错误中止连接 |\n| A7 吊销审计 | `TestRevocationA7` | 首次 `201`、重复与并发 `200`、仅一条 REVOKED 审计、跨租户 404 |\n\n### 实测结果（2026-10-27，WSL2 / Go 1.22.5 / Node 24.3.0）\n\n- `go test -race ./...`：通过，约 3.1s。\n- 100,000 行生成：**9.83s**，峰值内存约 114MB；`foreign_key_check`、`integrity_check`、审计一致性均通过。\n- 100,000 行 CSV：**0.397s**，5,800,049 字节，100,001 行；两次导出 SHA-256 相同。\n- 筛选 `Load Learner 007`：1,000 行，**0.051s**，58,054 字节。\n- 导出期间列表请求：`200`，**0.034s**。\n- 浏览器端到端（Playwright Chromium）：actor 切换、详情 A5、批量发证 1 issued / 3 skipped、CSV 下载均通过。\n\n详细命令、输出与边界说明见 [docs/verification.md](docs/verification.md)。\n\n## 项目结构\n\n```text\ncmd/server/           Go HTTP 服务入口（API + 静态前端）\ncmd/seed-large/       100,000 行大数据生成器\ninternal/store/       连接池、迁移、默认种子\ninternal/service/     鉴权、查询、事务发证、吊销、CSV 流\ninternal/httpapi/     Gin 路由、校验、错误、CSV、集成测试\nmigrations/           嵌入式 SQL 迁移\nweb/                  Vue 3 + TypeScript + Element Plus 前端\nscripts/              一键运行 / 验证 / 大数据脚本\ndocs/                 架构、数据模型、API、验收记录\nai/                   AI 会话导出、索引、决策日志、完整性声明\n```\n\n## 已知限制与取舍\n\n- 批量发证是同步请求，不引入异步任务、队列或轮询；题目未要求。\n- 吊销是终态，不支持恢复或吊销后重发；唯一约束按此设计。\n- 演示 token 是固定值，没有登录、注册、token 签发或真实鉴权。\n- 不提供可选扩展 `GET /learners` 和 `GET /bulk-operations/{operationId}`。\n- `failed / ISSUANCE_ERROR` 分支已实现（savepoint 回滚单个学员），但默认数据没有自然触发场景；自动化测试覆盖了 `issued` 和两类 `skipped`。\n- SQLite busy 的 `503` 映射已实现（10s busy timeout），测试未强制制造锁等待耗尽。\n- CSV 不带 BOM，便于程序比对；Excel 直接打开中文 CSV 的兼容性不在本题范围。\n- 前端完整引入 Element Plus，JS 约 1.0MB（gzip 321.8KB）；未做代码分割。\n- 中文字体使用 Noto Sans CJK SC 子集（`web/src/assets/`，SIL OFL，许可证随附），避免目标机器缺少 CJK 字体时出现方框。\n- 题目 PDF 未提交到仓库；实现依据为 `docs/` 中已冻结的契约。\n- 单机 SQLite，不承诺多主机共享本地数据库。\n- AI 交付记录见 [ai/completeness.md](ai/completeness.md)；相关规划、环境失败运行、实现和子代理会话均已导出，快照边界见完整性声明。\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1793094091697,
+            "ran": 1793094091858,
+            "completed": 1793094091889
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "10950dc8e6fc61f04e884ad027291f848b7d2406",
+        "end": "10950dc8e6fc61f04e884ad027291f848b7d2406",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0.001851522,
+      "tokens": {
+        "input": 255,
+        "output": 72,
+        "reasoning": 1505,
+        "cache": {
+          "read": 289024,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cbc8495001QTJI3R54aUM3kl",
+      "time": {
+        "created": 1793094091936,
+        "streamed": 1793094155619,
+        "completed": 1793094155702
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "Remote origin exists and branch tracks origin/master at 3ed6411. So we can push.\n\nNeed rewrite README to explicitly match requirements. The current README covers most but:\n- A1–A7 reproduction steps: only automated test mapping, not manual. User likely wants steps to reproduce (for evaluator). Need add a substantial section with exact curl/UI steps.\n- Known defects and unfinished work: current \"已知限制与取舍\" mixes both; add explicit \"Known defects\" and \"Unfinished work\". Could keep limitations and add two sections.\n- Actor tokens: present; add raw header/curl examples.\n- One-command startup: present, but maybe ensure a single command works from clone without `chmod`? Scripts are executable in git; yes.\n- 100k generation: present, but add reproduction of A6 with exact commands and expected counts.\n- Maybe README should be in English? The assessment requirement is likely English. User wrote the requirement in English. Hmm. They might be evaluating against a rubric that expects README content, not language. But \"README with one-command startup...\" suggests an English checklist. Current README is Chinese, which may be acceptable but could be seen as not matching. To be safe, make README bilingual or primarily English with Chinese notes? That doubles length. The repo docs are Chinese; consistency is nice. But the assessment PDF is English; evaluators may prefer English. The user asks in English bullets then Chinese question. They likely want the content, not language. Still, a bilingual README could satisfy both. But duplication is ugly.\n\nMaybe restructure README with English headings and concise English content, while docs remain Chinese. The user's checklist is in English; an English README directly maps. But they've been working in Chinese and previous README was Chinese; they didn't complain about language, only content. They said \"我看reademe目前应该是不符合要求的？\" — likely they read it and saw missing A1–A7 reproduction steps, known defects/unfinished work. So update content, keep Chinese.\n\nHowever, \"推送下第一版\" might mean they want to push immediately, perhaps before long rewrite? They said \"推送下第一版\" then ask if README doesn't meet requirements. Interpretation: \"Push the first version. I think the README currently doesn't meet requirements, right?\" So they want us to fix README then push the first version. We should rewrite, verify, commit, push.\n\nNeed also consider branch `master` vs `main`. Remote tracks origin/master. Push `git push origin master`.\n\nBefore push, ensure remote is accessible (credentials). Try `git ls-remote origin` maybe. We'll do after commit.\n\nNow design the A1–A7 reproduction steps. Must be accurate and reproducible from a fresh default DB. Need account for state mutation; give reset commands between scenarios or order.\n\nWe could add a dedicated `scripts/acceptance.sh` that automates A1–A7 with curl, making reproduction one command. That would be excellent and directly supports \"A1 to A7 reproduction steps\". But README can include manual steps. A script would be more robust. Should we create it? The user asked README with steps, not a script. But an acceptance script could be referenced. Time budget okay. However it adds complexity and needs test.\n\nLet's think about exact manual steps using curl and UI.\n\nBase URL `http://localhost:8080`.\n\nSetup:\n```bash\nrm -rf data/demo.db*\n./scripts/run.sh\n```\n(keep server running in terminal 1). For curl steps in terminal 2.\n\nA1:\n```bash\n# Alice sees only East certs 3,4\ncurl -s localhost:8080/api/v1/certificates -H 'Authorization: Bearer demo-alice-token'\n# Bob sees only West certs 1,2\ncurl ...\n# Cross-tenant detail -> 404\ncurl -i .../certificates/1 -H Alice\n# Cross-tenant bulk -> 404 (no write)\ncurl -i -X POST .../courses/3/bulk-operations -H Alice -H 'Idempotency-Key: a1-cross'\n# tenantId query -> 400\ncurl -i '.../certificates?tenantId=1' -H Alice\n# X-Tenant-Id ignored\ncurl .../certificates -H Alice -H 'X-Tenant-Id: 2'\n# CSV filter other tenant -> header only\ncurl .../certificates.csv?courseId=3 -H Alice\n```\nUI: switch actor in top right; list changes; course filter options change.\n\nA2 (fresh DB, before A7):\n```bash\nKEY=demo-a2-$(date +%s)\ncurl -i -X POST .../courses/1/bulk-operations -H Alice -H \"Idempotency-Key: $KEY\" -H 'Content-Type: application/json' -d '{}'\n# 201, total 4, issued 1, skipped 3, failed 0; Alex issued\ncurl -i -X POST ... same -> 200 identical body\n# certificate count still 3 via list? GET /certificates total=3\n# idempotent across process restart: restart server, replay same key -> 200; requires key known.\n```\nCould show using `curl -s` and `python3 -m json.tool`? jq not installed. Use `python3` optional. Simpler: pipe to `python3 -m json.tool`; Python available but maybe not. Use plain output.\n\nA3:\n```bash\n# same key, course 2 -> 409\ncurl -i -X POST .../courses/2/bulk-operations -H Alice -H \"Idempotency-Key: $KEY\" -H CT -d '{}'\n```\nExpected `409 IDEMPOTENCY_CONFLICT`.\nNote use a fresh key from A2; if you reset, A3 can use any key after issuing course1.\nA4:\n- same A2 response shows results; list all 4 statuses:\n  - Alex issued\n  - Sam skipped COURSE_INCOMPLETE\n  - Taylor skipped ALREADY_CERTIFIED\n  - Morgan skipped CERTIFICATE_REVOKED\nCould show UI bulk dialog screenshot. Or curl response.\n- Also query course enrollments:\n```bash\ncurl .../courses/1/enrollments -H Alice\n```\nshows eligibility.\n\nA5:\n```bash\ncurl .../certificates/3 -H Alice | grep/sed issuedLocalAt\n# 2026-01-11T00:30:00.000+11:00\ncurl .../certificates/1 -H Bob -> 2026-01-10T21:30:00.000+08:00\n```\nUI: detail drawer.\nA5 also local date sorting:\n```bash\ncurl '.../certificates?sortBy=issuedLocalDate&sortOrder=asc' -H Alice\n```\nIDs 4,3.\nA6:\n- Generate large DB in terminal 2 (server default still running):\n```bash\nrm -f data/large-demo.db* data/large-demo.manifest.json\n./scripts/seed-large.sh\n# expected ~10s; manifest checks\nADDR=:8081 DB=data/large-demo.db ./scripts/run.sh\n```\nBut `scripts/run.sh` rebuilds frontend; okay. It will use large DB and seed? SeedIfEmpty sees tenants >0; no changes.\n- Export:\n```bash\ntime curl -s -o /tmp/certificates.csv 'http://localhost:8081/api/v1/certificates.csv?sortBy=issuedLocalDate&sortOrder=desc' -H Alice\nwc -l /tmp/certificates.csv   # 100001\nhead -1\nsha256sum /tmp/certificates.csv\n# repeat -> diff\n```\n- Filtered export:\n```bash\ncurl ...?q=Load%20Learner%20007&sortBy=serialNumber&sortOrder=asc | wc -l # 1001\n```\n- List during export:\n```bash\ncurl ...export -o /tmp/a.csv &\ncurl -w '%{time_total}\\n' .../certificates?page=1 -H Alice\nwait\n```\n- Verify East/West: Bob total 2.\n- Mid-stream abort is tested by `go test -run TestCSVAbortOnMidStreamError`; manual injection not easily available. Note automated test.\nA7:\n- Fresh DB recommended (since A2 issued Alex, Taylor still active). Revoke Taylor id 3:\n```bash\ncurl -i -X PUT .../certificates/3/revocation -H Alice -H CT -d '{}' # 201\ncurl -i -X PUT ... same (empty body) # 200 same revokedAt\ncurl .../certificates/3 -> status REVOKED, issued fields unchanged\n```\n- Audit evidence: no audit API; use `go test -run TestRevocationA7` or direct DB query. `sqlite3` CLI isn't installed in our env, but users may have it. Better reference test; or use a small Go command? Not needed. State \"审计条数由 TestRevocationA7 断言；无审计查询 API.\" For manual UI, detail shows revokedBy/At.\n- A7 should be done after A2? If A2 issued Alex, Taylor still active, okay. If A2 used course1, Taylor active; revoke works. If A7 first, then A2 still issues Alex. Both fine; no reset strictly needed except to demonstrate initial state. But A2 replay after A7 has historical result; not needed. Note reset for clean reproducible IDs.\n\nOne-command startup:\n- `./scripts/run.sh` requires executable bit; git preserves. If user downloads zip, may lose mode; mention `chmod +x scripts/*.sh` optional? Probably not necessary.\n- Makefile `make run` alternative.\n- Ports.\n- Data reset.\n- Requirements.\n\nActor tokens/headers:\n- Table.\n- Example:\n```bash\ncurl -s http://localhost:8080/api/v1/me -H 'Authorization: Bearer demo-alice-token'\n```\n- Header exactly one Authorization; token case-sensitive; tenant via token; `X-Tenant-Id` ignored; `tenantId` query 400.\n- Content-Type for write requests.\n\n100k generation section: already, but add exact expected manifest and how to inspect; include generation command from clean path, refusal behavior, independent DB, manifest.\n- `data/large-demo.db` currently exists locally but ignored; if user runs `./scripts/seed-large.sh`, it refuses. README says remove first. Good.\n\nKnown defects:\nWe need distinguish actual defects from out-of-scope:\n1. Ambiguous 500/503 across closing dialog: idempotency key held only in component memory; closing/reopening loses it. Server may have committed, so a new key can create a second bulk operation (cert uniqueness still prevents duplicate certs). This is a real defect.\n2. `failed/ISSUANCE_ERROR` branch implemented but not E2E tested (verification gap).\n3. SQLite 503 busy path not forced in tests (verification gap).\n4. CSV mid-stream failure test uses injected error, not real disk failure.\n5. No pagination in enrollment preview: UI shows only first 100 enrollments while bulk processes all; alert indicates it, but preview incomplete. This is a UI limitation/defect.\n6. Frontend uses full Element Plus bundle; 1MB JS warning.\n7. No request cancellation/abort for `getMe`/`getCourses`? We added. Good.\n8. API `GET /certificates` with huge page? capped 1e9; fine.\n9. Large generator supports `--tenant` other than East but README only East; manifest target check uses uppercase; not a defect.\n10. CSV no BOM; Excel Chinese display issue (design tradeoff).\n11. Default demo has only one ACTIVE cert per tenant; A7 then A2 state caveat (operational).\n12. No real auth.\n13. Single-host SQLite.\n14. If two exports concurrently >2, third gets 503; UI doesn't auto-retry; minor.\n\nUnfinished work:\n- Optional endpoints `GET /learners`, `GET /bulk-operations/{id}`.\n- Async bulk/progress/queue (out of scope but unfinished relative to production).\n- Real login/token issuance.\n- Per-learner failed E2E fixture; forced SQLite busy test; real disk failure injection.\n- Audit query API (not required).\n- CSV BOM/Excel compatibility option.\n- Accessibility/keyboard nav and manual cross-browser testing (only Chromium headless).\n- Independent written question (Section 6) is not included; candidate must complete.\n- No PDF in repo (maybe not \"work\").\n- AI session export snapshot limitation? Not unfinished work, but completeness.\n\nMaybe separate:\n**Known defects** (things that are wrong/imperfect):\n- Idempotency key loss on dialog close after ambiguous failure.\n- Enrollment preview capped at 100.\n- CSV no BOM (Excel).\n- Full bundle size.\n- Default demo state caveat.\n**Verification gaps / unfinished work**:\n- failed branch no E2E.\n- 503 not forced.\n- CSV error injected only.\n- optional endpoints, async, auth out of scope.\n- independent written question.\n\nThe assessment likely expects \"known defects\" and \"unfinished work\" explicitly. Use those headings.\n\nAlso \"README with one-command startup\" maybe they expect a single command that works from clean clone. Our `./scripts/run.sh` builds frontend and starts. Good. Add `git clone` + `cd` + `./scripts/run.sh`? Yes:\n```bash\ngit clone <repo>\ncd certificate-admin-console\n./scripts/run.sh\n```\nNo separate npm install needed. Good.\n\nShould we add a `scripts/acceptance.sh` to automate A1–A7? The README steps are long. A script could be useful, but writing and testing is time. The user specifically asks README with steps; manual steps suffice. However \"reproduction steps\" might be judged by clarity. We can include a compact table + commands. We need ensure commands don't require jq. Use `python3 -m json.tool` optional? Avoid relying on it. Plain curl output is fine.\n\nMaybe include a \"Quick acceptance\" command:\n```bash\ngo test ./internal/httpapi -run 'Test...' -v\n```\nand manual steps. Good.\n\nNeed update README rather than full rewrite? It may be easier to rewrite entire README with a new structure, keeping useful content. Let's create a comprehensive but not bloated README (~350 lines). The user's checklist should be easy to find.\n\nStructure:\n1. Title + summary + stack.\n2. **1. One-command startup** (must-have #1)\n   - prerequisites, clone/run, URLs, reset, dev mode.\n3. **2. Actors, tokens, headers** (must-have #2)\n   - table, curl examples, tenant rules, content type.\n4. **3. A1–A7 reproduction** (must-have #3)\n   - setup/clean state, general notes.\n   - A1 through A7 each with Goal, UI steps, curl commands, expected results.\n   - reset guidance.\n   - Automated equivalent table/command.\n5. **4. 100,000-row generation** (must-have #4)\n   - generate, start, manifest, A6 export commands, expected numbers, cleanup.\n6. **5. Automated verification**\n   - `./scripts/verify.sh`, test mapping, measured results, browser smoke.\n7. **6. Known defects** (must-have #5)\n8. **7. Unfinished work** (must-have #6)\n9. **8. Project structure**\n10. **9. AI delivery records**\n11. Maybe \"Design decisions\" short (serial, idempotency, time, CSV) folded into appendix.\n12. **10. API summary** maybe earlier.\n\nNeed not duplicate docs; link to docs/API.md.\n\nLanguage: Keep Chinese. Maybe add English section titles in parentheses to map to the checklist:\n```\n## 1. One-command startup（一键启动）\n```\nThis makes it obvious to an English-speaking reviewer. Use bilingual headings for the six required items:\n- One-command startup\n- Actors and authorization\n- A1–A7 reproduction steps\n- 100,000-row generation\n- Known defects\n- Unfinished work\nThis is a nice compromise.\n\nWithin sections, Chinese text.\n\nLet's ensure commands exact. Use `BASE=http://localhost:8080` variable at start of A1–A7 section to shorten:\n```bash\nBASE=http://localhost:8080\nAUTH='Authorization: Bearer demo-alice-token'\n```\nBut shell variables in README examples make copy-paste easier. Define once. For Bob, `AUTH_BOB`.\n- `curl -s` etc.\n- For status codes, use `-i` or `-o /dev/null -w '%{http_code}\\n'`. Include expected.\n\nA1 exact:\n```bash\nBASE=http://localhost:8080\nALICE='Authorization: Bearer demo-alice-token'\nBOB='Authorization: Bearer demo-bob-token'\n\n# East list: total 2, ids 3,4\ncurl -s \"$BASE/api/v1/certificates\" -H \"$ALICE\"\n\n# West list: total 2, ids 1,2\ncurl -s \"$BASE/api/v1/certificates\" -H \"$BOB\"\n\n# Cross-tenant detail -> 404\ncurl -s -o /dev/null -w '%{http_code}\\n' \"$BASE/api/v1/certificates/1\" -H \"$ALICE\"\n\n# Cross-tenant course enrollments -> 404\ncurl -s -o /dev/null -w '%{http_code}\\n' \"$BASE/api/v1/courses/3/enrollments\" -H \"$ALICE\"\n\n# Cross-tenant bulk -> 404; no certificate created\ncurl -s -o /dev/null -w '%{http_code}\\n' -X POST \"$BASE/api/v1/courses/3/bulk-operations\" -H \"$ALICE\" -H 'Idempotency-Key: a1-cross' -H 'Content-Type: application/json' -d '{}'\n\n# client tenantId -> 400\ncurl -s -o /dev/null -w '%{http_code}\\n' \"$BASE/api/v1/certificates?tenantId=1\" -H \"$ALICE\"\n\n# X-Tenant-Id ignored: still East\ncurl -s \"$BASE/api/v1/certificates\" -H \"$ALICE\" -H 'X-Tenant-Id: 2'\n\n# Cross-tenant filter -> empty\ncurl -s \"$BASE/api/v1/certificates?courseId=3\" -H \"$ALICE\"\ncurl -s \"$BASE/api/v1/certificates.csv?courseId=3\" -H \"$ALICE\"   # header only\n```\nUI steps: switch actor, verify list; course options.\n\nA2:\nNeed a unique key. Shell:\n```bash\nKEY=\"a2-$(date +%s)\"\ncurl -s -i -X POST \"$BASE/api/v1/courses/1/bulk-operations\" -H \"$ALICE\" -H \"Idempotency-Key: $KEY\" -H 'Content-Type: application/json' -d '{}'\n```\nExpected 201; `total=4 issued=1 skipped=3 failed=0`.\nReplay:\n```bash\ncurl -s -o /tmp/a2-first.json -w '%{http_code}\\n' ... \ncurl -s -o /tmp/a2-replay.json -w '%{http_code}\\n' ...  # 200\ncmp /tmp/a2-first.json /tmp/a2-replay.json && echo identical\n```\nNeed first response saved. Do:\n```bash\ncurl -s -o /tmp/a2-first.json -w 'first=%{http_code}\\n' ...\ncurl -s -o /tmp/a2-replay.json -w 'replay=%{http_code}\\n' ...\ncmp ...\n```\nCheck list total 3.\nConcurrency: optional; mention `go test -run TestBulkConcurrentSameKeyA2`. Manual concurrent curl:\n```bash\nfor i in $(seq 1 8); do curl ... & done; wait\n```\nAll bodies same; one 201. But output interleaves; not necessary. Mention automated test.\nImportant: A2 replay after restart? Could show server restart, but not needed. Idempotency persisted in DB; mention.\n\nA3:\nUse same `KEY` from A2 (in same shell). If new shell, set KEY to value? The key variable may be lost; note \"复用上一节的 KEY；若要重来，重新执行 A2.\" Then:\n```bash\ncurl -s -i -X POST \"$BASE/api/v1/courses/2/bulk-operations\" -H \"$ALICE\" -H \"Idempotency-Key: $KEY\" -H CT -d '{}'\n# 409 IDEMPOTENCY_CONFLICT\n```\nCheck course2 cert count still 0? `GET /courses/2/enrollments` Alex certificate null.\nA3 body unknown:\n```bash\ncurl -i ... -d '{\"tenantId\":1}' -> 400\n```\nMaybe include.\n\nA4:\nReview A2 response:\n`results` order learnerId 1..4 with statuses/reasons. Or:\n```bash\ncurl -s \"$BASE/api/v1/courses/1/enrollments\" -H \"$ALICE\"\n```\nShows eligibility.\nExpected table in README. Good.\n\nA5:\n```bash\ncurl -s \"$BASE/api/v1/certificates/3\" -H \"$ALICE\"   # East Taylor\ncurl -s \"$BASE/api/v1/certificates/1\" -H \"$BOB\"     # West Taylor\n```\nExpected localAt/date/timezone. UI drawer.\nSort:\n```bash\ncurl -s \"$BASE/api/v1/certificates?sortBy=issuedLocalDate&sortOrder=asc\" -H \"$ALICE\"\n# ids [4,3]\n```\nNote A7 may have revoked Taylor; issuedLocalAt unchanged. Fine.\n\nA6:\nSeparate DB and port. Full commands. Use `large-demo.db`; if exists, remove. Generate. Start server in second terminal. Export:\n```bash\nBASE_LARGE=http://localhost:8081\ntime curl -s -o /tmp/certificates.csv \"$BASE_LARGE/api/v1/certificates.csv?sortBy=issuedLocalDate&sortOrder=desc\" -H \"$ALICE\"\nwc -l /tmp/certificates.csv\nhead -1 /tmp/certificates.csv\ntail -1 ...\n```\nExpected 100001 lines, first Taylor? For large DB default East has Taylor Jan 11, Morgan Jan 10, plus 100k load dates Jan 2-31. Sorted local date desc: Jan 31 rows first (Load), and Taylor Jan 11 somewhere; not needed. `head -1` header.\nCompare two exports:\n```bash\ntime curl ... -o /tmp/certificates-2.csv\nsha256sum ...\n```\nFilter 007:\n```bash\ncurl -s -o /tmp/007.csv \"$BASE_LARGE/...q=Load%20Learner%20007&sortBy=serialNumber&sortOrder=asc\" -H \"$ALICE\"\nwc -l # 1001\nhead -2\n```\nList during export:\n```bash\ncurl -s -o /tmp/export.csv \"$BASE_LARGE/...\" -H \"$ALICE\" &\ncurl -s -o /dev/null -w 'list=%{http_code} %{time_total}s\\n' \"$BASE_LARGE/api/v1/certificates?page=1\" -H \"$ALICE\"\nwait\n```\nExpected 200 quickly. Note measured 0.034s in our env.\nMid-stream abort: `go test ./internal/httpapi -run TestCSVAbortOnMidStreamError -v`; explain it injects row error and expects truncated connection.\n- `manifest` expected counts. Show JSON excerpt.\n- West total 2:\n```bash\ncurl -s \"$BASE_LARGE/api/v1/certificates?pageSize=1\" -H \"$BOB\" # total 2\n```\n- Cleanup: stop 8081; remove DB.\n\nA7:\n```bash\ncurl -s -o /tmp/rev1.json -w 'first=%{http_code}\\n' -X PUT \"$BASE/api/v1/certificates/3/revocation\" -H \"$ALICE\" -H CT -d '{}'\ncurl -s -o /tmp/rev2.json -w 'repeat=%{http_code}\\n' -X PUT ... -H \"$ALICE\"\ncmp /tmp/rev1.json /tmp/rev2.json && echo identical\ncurl -s \"$BASE/api/v1/certificates/3\" -H \"$ALICE\"\n```\nExpected 201, 200, identical, status REVOKED; issuedAt/local unchanged; revokedBy.\nAudit: `go test ./internal/httpapi -run TestRevocationA7 -v` verifies one REVOKED audit and concurrent. No audit API.\n- If Taylor already revoked from prior run, repeat returns 200; reset to demonstrate 201.\n- Cross-tenant: Bob PUT certificate 3 -> 404.\n\nSetup/reset:\n- Use fresh DB for the sequence A1→A2→A3→A4→A5→A7; A6 separate.\n- `rm -rf data/demo.db*` before starting. Note A2 issues Alex, A7 revokes Taylor; no conflict.\n- A2 replay after A7 still historical result; mention.\n\nAutomated verification:\n- `./scripts/verify.sh`\n- table mapping tests (existing).\n- measured results.\n- Browser smoke.\n\nKnown defects:\nLet's explicitly list:\n1. Issue dialog loses idempotency key on close/reopen after ambiguous 500/503/network failure. Server may have committed; reopening generates a new key. Certificate uniqueness prevents duplicate certificate, but an extra `bulk_operations` row and a different operationId can result. Workaround: keep dialog open and use \"使用同一幂等键重试\"; refresh list to see committed result.\n2. Enrollment preview in issue dialog fetches only first 100 rows (pageSize=100) while backend processes all; UI alert shows total > preview, but per-learner preview incomplete for large courses.\n3. CSV UTF-8 without BOM; Excel may misdetect Chinese. Programmatic consumers unaffected.\n4. Frontend imports full Element Plus: ~1.0MB JS (gzip 322KB), Vite chunk warning; no route-level code splitting.\n5. Default demo only one ACTIVE cert per tenant; after A7 Taylor is revoked, so a clean A2 demo uses Alex; repeated runs mutate state; reset needed for repeatable screenshots/IDs.\n6. No real auth; demo tokens hardcoded. (Maybe limitation not defect, but list as known defect/limitation.)\n7. `failed/ISSUANCE_ERROR` and 503 busy paths are implemented but not exercised end-to-end (also verification gap).\n8. CSV mid-stream abort test uses injected error, not real disk failure.\n\nUnfinished work:\n1. `failed` and `503` E2E tests/fixtures.\n2. Optional endpoints `GET /learners`, `GET /bulk-operations/{id}` (not in first version).\n3. Async bulk/progress/cancel; not required by task.\n4. Real login/token lifecycle.\n5. Audit query API (only DB + tests).\n6. CSV BOM/Excel compatibility option.\n7. Accessibility/keyboard and cross-browser testing (only Chromium headless).\n8. Independent written question (Section 6) — not in repo, candidate must complete.\n9. Maybe \"manual visual review on Safari/Firefox/Windows\" etc.\n10. \"Large dataset is not committed; must generate\" — not unfinished, by design.\n11. AI session export final snapshot — not code work.\n\nAlso include \"Out of scope\" vs unfinished. The user asked \"unfinished work\"; list both not done and intentionally out of scope, clearly labeled.\n\nOne-command startup details:\n- `./scripts/run.sh` builds frontend and starts server; if `web/node_modules` missing runs `npm ci`.\n- Requirements: Go 1.22.5+, Node 20.19+, npm.\n- First run creates DB, seeds. No `.env`.\n- URLs and actors.\n- `make run` alternative.\n- Non-default port/DB.\n- Reset.\n- `SKIP_WEB_BUILD=1` optional? Mention if dist already built.\n- If Go/Node versions differ, state tested.\n\nActor tokens:\n- Table.\n- Header examples.\n- Exactly one Authorization header; token case-sensitive; 401 returns WWW-Authenticate.\n- `X-Tenant-Id` ignored; query/body tenantId 400.\n- Write body content type.\n\n100k:\n- Generation script + explicit command.\n- Outputs manifest path, counts, checks.\n- Starting server on :8081 with DB.\n- A6 commands.\n- Expected performance (environment-specific).\n- Generator refusal rules (existing file/default DB).\n- Cleanup.\n\nAPI summary maybe after A1–A7 or appendix.\n\nProject structure and AI records.\n\nLet's rewrite README entirely. Need ensure markdown tables/images. Keep screenshots section perhaps after quick start.\n\nLength maybe ~400 lines; okay. User wants completeness.\n\nBefore writing, check `scripts/run.sh` behavior if `web/node_modules` exists but package-lock changed; it won't reinstall. Fine.\n- `./scripts/run.sh` uses `go run`; first run compiles. Good.\n- It builds frontend every time; ~1s.\n- `make run` uses same.\n\nPotential issue: `./scripts/run.sh` requires `npm ci` which may fail if package-lock and package.json out of sync; currently sync (npm install created lock). Good.\n\nOne-command startup from a clean clone: `./scripts/run.sh` executable bit tracked? `git ls-files -s scripts/run.sh` shows 100755. Check later.\n\nNow build README content. Let's write with careful commands.\n\nFor curl JSON pretty-print, avoid jq. Use plain. For status codes, use `-w`.\n\nA1 expected:\n- East list `total:2`, IDs 3,4.\n- West list `total:2`, IDs 1,2.\n- Cross-tenant 404.\n- Cross-tenant bulk 404; then Alice list still total 2.\n- tenantId 400.\n- X-Tenant-Id ignored still total 2.\n- courseId=3 total 0; CSV header only.\n\nA2:\n- `KEY=\"a2-$(date +%s)\"`; if same second collision? Retry later. Fine.\n- `curl -s -o ... -w` with `-d '{}'` requires `Content-Type`; include.\n- Expected counts.\n- Replay `cmp`.\n- `GET /certificates` total 3 (2 seed + Alex).\n- Note if A2 rerun on same DB with a new key, Alex already certified -> issued 0; reset for clean.\n- Concurrency test command.\n\nA3:\n- Use same KEY; if shell lost, set `KEY=<value printed earlier>`. The first response doesn't print key; user knows variable. Add note.\n- 409 and `error.code`.\n- Unknown body 400 with new key? Use same key? Body validation before key; `{\"tenantId\":1}` -> 400. Fine.\n\nA4:\n- Expected results table.\n- `GET /courses/1/enrollments` eligibility. Note order by enrollment id.\n- `total=4`, results length 4.\n\nA5:\n- East/West local time. `GET` detail.\n- UI drawer. Sort asc IDs `[4,3]`.\n- Note timezone data embedded (`time/tzdata`), so no OS tzdata? We import time/tzdata, yes. Mention.\n\nA6:\n- `./scripts/seed-large.sh` refuses if exists; remove first.\n- Generation time ~10s.\n- Manifest excerpt. Could show full counts.\n- Start large server: `ADDR=:8081 DB=data/large-demo.db ./scripts/run.sh`; this rebuilds frontend; fine.\n- Export; expected 100001 lines. `wc -l` counts CRLF lines; yes.\n- Compare hashes.\n- Filter 007 -> 1001 lines, first two lines.\n- Concurrent list command.\n- Mid-stream test.\n- Note current local `data/large-demo.db` may exist; remove.\n- Cleanup.\n\nA7:\n- Fresh DB or after A2; Taylor active unless already revoked.\n- First 201, repeat 200, identical.\n- Detail status.\n- Audit test command.\n- Cross-tenant Bob 404.\n\nKnown defects table maybe with severity/impact/workaround:\n| # | Defect | Impact | Workaround |\nThis is clear.\n1. Idempotency key lost on dialog close after ambiguous failure. Workaround: retry in dialog; refresh.\n2. Enrollment preview 100.\n3. CSV no BOM.\n4. Bundle size.\n5. Default DB state (one active; repeat runs).\n6. Demo auth.\nCould label 1-2 as defects, 3-6 as limitations. The heading \"Known defects\" can include all with severity.\n\nUnfinished work list:\n- per-learner failed/503 tests.\n- optional endpoints.\n- async.\n- real auth.\n- audit API.\n- accessibility/cross-browser.\n- written question.\n- Maybe \"manual reviewer verification of 100k on a different machine\" not.\n\n`README` should also mention \"Push first version\" no.\n\nLet's write the README. Use write tool to replace.\n\nNeed preserve screenshot section? Include under \"界面\" after quick start or before A1. Keep.\n\nLet's draft.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793094093234,
+            "completed": 1793094155609
+          }
+        },
+        {
+          "type": "text",
+          "text": "README 确实缺两块关键内容：A1–A7 的手工复现步骤，以及明确的 Known defects / Unfinished work。我会按你列的六项重写，然后提交并推送到 `origin/master`。"
+        },
+        {
+          "type": "tool",
+          "id": "call_00_BE5jXhwr8D7hDR0hR4cS3446",
+          "name": "write",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "content": "# Certificate Admin Console\n\n多租户证书管理后台，按 `docs/` 中已冻结的架构、数据模型和 API 契约实现。覆盖证书列表、详情、课程批量发证、吊销、CSV 导出，以及 A1–A7 验收场景。\n\n- 后端：Go 1.22.5 + Gin 1.10.0 + SQLite（`modernc.org/sqlite` 1.34.5，纯 Go，无 CGO）\n- 前端：Vue 3 + TypeScript + Vite 8 + Element Plus\n- 运行形态：单个 Go 进程同时提供 `/api/v1` 和构建后的前端静态文件\n- 数据：SQLite WAL，独立写连接 + 多读连接；默认库 `data/demo.db`\n\n## 1. One-command startup（一键启动）\n\n环境要求：**Go 1.22.5+**、**Node.js 20.19+**（实测 24.3.0）、npm。\n\n```bash\ngit clone https://github.com/WiccyCheng/certificate-admin-console.git\ncd certificate-admin-console\n./scripts/run.sh\n# 打开 http://localhost:8080\n```\n\n这一条命令会：\n\n1. 若 `web/node_modules` 不存在，执行 `npm ci`；\n2. 构建前端到 `web/dist`；\n3. 启动 Go 服务，创建并初始化 `data/demo.db`（仅首次）。\n\n重复启动不会重置已有数据。需要重置演示库时先停止服务：\n\n```bash\nrm -rf data/demo.db*\n./scripts/run.sh\n```\n\n常用变体：\n\n```bash\n# 换端口 / 换数据库\nADDR=:8081 ./scripts/run.sh\nDB=data/another.db ./scripts/run.sh\n\n# 已有 web/dist，跳过前端构建\nSKIP_WEB_BUILD=1 ./scripts/run.sh\n\n# Makefile 等价入口\nmake run\n```\n\n开发模式（前端热更新）：\n\n```bash\n# 终端 1\ngo run ./cmd/server --db data/demo.db --addr :8080\n\n# 终端 2\ncd web && npm install && npm run dev   # http://localhost:5173，/api 代理到 :8080\n```\n\n### 界面\n\n| 证书列表 | 批量发证与逐学员结果 |\n| --- | --- |\n| ![证书列表](docs/screenshots/list.png) | ![批量发证](docs/screenshots/bulk-issue.png) |\n\n| 证书详情（A5 本地时间） |\n| --- |\n| ![证书详情](docs/screenshots/detail.png) |\n\n## 2. Actors, tokens and headers（身份与请求头）\n\n服务端只信 `Authorization` 请求头，tenant 由 token 派生，客户端不能自选租户。\n\n| actor | token | 租户 | 时区 |\n| --- | --- | --- | --- |\n| alice@east.test | `demo-alice-token` | East | `Australia/Sydney` |\n| bob@west.test | `demo-bob-token` | West | `Australia/Perth` |\n\n```bash\nBASE=http://localhost:8080\nALICE='Authorization: Bearer demo-alice-token'\nBOB='Authorization: Bearer demo-bob-token'\n\ncurl -s \"$BASE/api/v1/me\" -H \"$ALICE\"\n# {\"admin\":{\"id\":1,\"email\":\"alice@east.test\"},\"tenant\":{\"id\":1,\"code\":\"EAST\",...}}\n\ncurl -s \"$BASE/api/v1/certificates\" -H \"$ALICE\"\ncurl -s \"$BASE/api/v1/certificates\" -H \"$BOB\"\n```\n\n- token 区分大小写；缺失、格式错误、未知 token 或多个 `Authorization` 值 → `401`，并带 `WWW-Authenticate: Bearer realm=\"certificate-admin\"`。\n- `tenantId` 作为 query/body 字段 → `400`；`X-Tenant-Id` 被忽略，仍按 token 的租户执行。\n- 非空 body 必须使用 `Content-Type: application/json`，否则 `415`。\n- 批量发证必须带且只能带一个 `Idempotency-Key: [A-Za-z0-9_-]{1,128}`。\n- 前端右上角有 actor 切换器；REST 客户端直接使用上面的 Bearer token。\n\n## 3. A1–A7 reproduction steps（复现步骤）\n\n以下步骤默认使用**全新默认库**。先准备干净环境：\n\n```bash\nrm -rf data/demo.db*\n./scripts/run.sh\n# 另开终端，设置：\nBASE=http://localhost:8080\nALICE='Authorization: Bearer demo-alice-token'\nBOB='Authorization: Bearer demo-bob-token'\n```\n\n建议顺序：A1 → A2 → A3 → A4 → A5 → A7。A2 会给 Alex 发证，A7 会吊销 Taylor，二者不冲突。A6 使用独立大数据库，最后执行。\n\n### A1 租户隔离\n\n**目标**：East/West 只能看到自己的数据；跨租户路径资源返回 `404`；列表/CSV 过滤不泄露存在性。\n\n```bash\n# Alice 只看到 East 的证书 3、4（total=2）\ncurl -s \"$BASE/api/v1/certificates\" -H \"$ALICE\"\n\n# Bob 只看到 West 的证书 1、2（total=2）\ncurl -s \"$BASE/api/v1/certificates\" -H \"$BOB\"\n\n# 跨租户详情 → 404\ncurl -s -o /dev/null -w '%{http_code}\\n' \"$BASE/api/v1/certificates/1\" -H \"$ALICE\"\ncurl -s -o /dev/null -w '%{http_code}\\n' \"$BASE/api/v1/certificates/3\" -H \"$BOB\"\n\n# 跨租户课程报名 → 404\ncurl -s -o /dev/null -w '%{http_code}\\n' \"$BASE/api/v1/courses/3/enrollments\" -H \"$ALICE\"\n\n# 跨租户批量发证 → 404，且不创建证书/审计\ncurl -s -o /dev/null -w '%{http_code}\\n' -X POST \"$BASE/api/v1/courses/3/bulk-operations\" \\\n  -H \"$ALICE\" -H 'Idempotency-Key: a1-cross' -H 'Content-Type: application/json' -d '{}'\ncurl -s \"$BASE/api/v1/certificates\" -H \"$ALICE\"   # 仍是 total=2\n\n# 客户端提交 tenantId → 400\ncurl -s -o /dev/null -w '%{http_code}\\n' \"$BASE/api/v1/certificates?tenantId=1\" -H \"$ALICE\"\n\n# X-Tenant-Id 被忽略：仍是 East\ncurl -s \"$BASE/api/v1/certificates\" -H \"$ALICE\" -H 'X-Tenant-Id: 2'\n\n# 跨租户过滤：列表空结果，CSV 仅表头\ncurl -s \"$BASE/api/v1/certificates?courseId=3\" -H \"$ALICE\"\ncurl -s \"$BASE/api/v1/certificates.csv?courseId=3\" -H \"$ALICE\"\n```\n\n**UI**：右上角切换 Alice/Bob，列表立即变化；课程筛选只显示当前租户的课程。\n\n### A2 重试安全\n\n**目标**：同一幂等键重试得到同一份已提交结果，不重复发证。\n\n```bash\nKEY=\"a2-$(date +%s)\"\n\n# 首次提交 → 201；total=4 issued=1 skipped=3 failed=0，Alex 获得证书\ncurl -s -o /tmp/a2-first.json -w 'first=%{http_code}\\n' \\\n  -X POST \"$BASE/api/v1/courses/1/bulk-operations\" \\\n  -H \"$ALICE\" -H \"Idempotency-Key: $KEY\" -H 'Content-Type: application/json' -d '{}'\n\n# 同键同课程重放 → 200；响应字节与首次完全一致\ncurl -s -o /tmp/a2-replay.json -w 'replay=%{http_code}\\n' \\\n  -X POST \"$BASE/api/v1/courses/1/bulk-operations\" \\\n  -H \"$ALICE\" -H \"Idempotency-Key: $KEY\" -H 'Content-Type: application/json' -d '{}'\ncmp /tmp/a2-first.json /tmp/a2-replay.json && echo 'identical replay'\n\n# East 证书数从 2 变 3，不会重复发证\ncurl -s \"$BASE/api/v1/certificates\" -H \"$ALICE\"\n```\n\n**UI**：批量发证 → 选 `Safety 101` → 提交；关闭前网络失败时点“使用同一幂等键重试”，不要换键。\n\n自动化并发验证：\n\n```bash\ngo test ./internal/httpapi -run TestBulkConcurrentSameKeyA2 -v\n```\n\n### A3 键误用\n\n**目标**：同一幂等键用于不同课程返回 `409`，不执行第二次操作。\n\n```bash\n# 复用 A2 的 KEY；如果换了终端，请把 KEY 设为 A2 使用的值\ncurl -s -o /tmp/a3.json -w 'conflict=%{http_code}\\n' \\\n  -X POST \"$BASE/api/v1/courses/2/bulk-operations\" \\\n  -H \"$ALICE\" -H \"Idempotency-Key: $KEY\" -H 'Content-Type: application/json' -d '{}'\ncat /tmp/a3.json   # error.code = IDEMPOTENCY_CONFLICT\n\n# body 语法错误即使键已存在也先返回 400\ncurl -s -o /dev/null -w 'bad-body=%{http_code}\\n' \\\n  -X POST \"$BASE/api/v1/courses/1/bulk-operations\" \\\n  -H \"$ALICE\" -H \"Idempotency-Key: $KEY\" -H 'Content-Type: application/json' -d '{\"tenantId\":1}'\n```\n\n预期：`409`，课程 2 的 Alex 仍然没有证书；`400` 不改变已有结果。\n\n### A4 学员结果\n\n**目标**：批量响应按 `learnerId ASC` 返回全部报名，并给出 `issued` / `skipped` / `failed` 及原因。\n\nA2 的响应应包含：\n\n| learnerId | 学员 | status | reasonCode |\n| --- | --- | --- | --- |\n| 1 | Alex Lee | `issued` | `null` |\n| 2 | Sam Chen | `skipped` | `COURSE_INCOMPLETE` |\n| 3 | Taylor Kim | `skipped` | `ALREADY_CERTIFIED` |\n| 4 | Morgan Wu | `skipped` | `CERTIFICATE_REVOKED` |\n\n```bash\ncurl -s \"$BASE/api/v1/courses/1/enrollments\" -H \"$ALICE\"\n```\n\n报名列表的 `issuanceEligibility` 同时展示：可发证、课程未完成、已有有效证书、已有吊销证书。计数不变量：`total = results.length = issued + skipped + failed`。\n\n### A5 DST 与本地日期\n\n**目标**：UTC 事实按租户 IANA 时区派生本地日期/时间，不写死偏移、不使用浏览器时区。\n\n```bash\n# East Taylor：issued_at=2026-01-10T13:30:00.000Z\ncurl -s \"$BASE/api/v1/certificates/3\" -H \"$ALICE\"\n# issuedLocalAt = 2026-01-11T00:30:00.000+11:00\n# issuedLocalDate = 2026-01-11\n# timezone = Australia/Sydney\n\n# West Taylor：同一 UTC 时刻\ncurl -s \"$BASE/api/v1/certificates/1\" -H \"$BOB\"\n# issuedLocalAt = 2026-01-10T21:30:00.000+08:00\n# issuedLocalDate = 2026-01-10\n# timezone = Australia/Perth\n\n# 按本地日期升序：Morgan（01-10）→ Taylor（01-11），ids [4,3]\ncurl -s \"$BASE/api/v1/certificates?sortBy=issuedLocalDate&sortOrder=asc\" -H \"$ALICE\"\n```\n\n**UI**：点击 Taylor 行打开详情抽屉，查看“租户本地时间”和“租户时区”。\n\n### A6 导出增长（100,000 行）\n\n见下一节 [4. 100,000-row generation](#4-100000-row-generation100000-行生成) 的完整命令。核心验收：\n\n```bash\n# 大库启动后\ntime curl -s -o /tmp/certificates.csv \\\n  \"$BASE_LARGE/api/v1/certificates.csv?sortBy=issuedLocalDate&sortOrder=desc\" -H \"$ALICE\"\nwc -l /tmp/certificates.csv        # 100001\nhead -1 /tmp/certificates.csv      # learnerName,courseTitle,serialNumber,issuedLocalDate\n```\n\n预期：`200`，约 0.4s（本环境），100,001 行（表头 + 100,000 张 East 证书）；两次导出 SHA-256 相同；导出期间列表仍返回 `200`。\n\n### A7 吊销与审计\n\n**目标**：首次吊销 `201` 并写一条审计；重复/并发吊销 `200`，不新增审计、不改变第一次时间和操作者。\n\n```bash\n# 首次 ACTIVE → REVOKED → 201\ncurl -s -o /tmp/rev1.json -w 'first=%{http_code}\\n' \\\n  -X PUT \"$BASE/api/v1/certificates/3/revocation\" \\\n  -H \"$ALICE\" -H 'Content-Type: application/json' -d '{}'\n\n# 重复吊销 → 200，revokedAt/revokedBy 与第一次相同\ncurl -s -o /tmp/rev2.json -w 'repeat=%{http_code}\\n' \\\n  -X PUT \"$BASE/api/v1/certificates/3/revocation\" -H \"$ALICE\"\ncmp /tmp/rev1.json /tmp/rev2.json && echo 'identical revocation'\n\n# 详情：status=REVOKED，发证时间/本地时间不变\ncurl -s \"$BASE/api/v1/certificates/3\" -H \"$ALICE\"\n\n# 跨租户吊销 → 404\ncurl -s -o /dev/null -w '%{http_code}\\n' \\\n  -X PUT \"$BASE/api/v1/certificates/3/revocation\" -H \"$BOB\"\n```\n\n审计条数没有查询 API，由自动化测试直接查库断言：\n\n```bash\ngo test ./internal/httpapi -run TestRevocationA7 -v\n```\n\n如果 Taylor 已经是 `REVOKED`（例如重复执行本节），首次请求会返回 `200` 而不是 `201`；要复现 `201` 请重置默认库。\n\n## 4. 100,000-row generation（100,000 行生成）\n\n生成器写入**独立数据库**，不污染 `data/demo.db`；目标文件已存在时拒绝执行。\n\n```bash\n# 1) 生成独立大库（约 10s）\nrm -f data/large-demo.db* data/large-demo.manifest.json\n./scripts/seed-large.sh\n\n# 等价的显式命令：\n# go run ./cmd/seed-large --db data/large-demo.db --tenant east --certificates 100000\n```\n\n生成内容：\n\n- East 共 **100,000** 张证书（含默认 2 张），West 保持 **2** 张；\n- 新增课程 `Export Load`、99,998 位学员、报名、ACTIVE 证书和 ISSUED 审计；\n- 姓名 `Load Learner 000`–`Load Learner 099`，序列号 `EAST-LOAD-000001`–`EAST-LOAD-099998`；\n- 发证 UTC 时间 `2026-01-01T13:30:00.000Z + (i % 30) 天`，共 30 个本地日期；\n- 输出 `data/large-demo.manifest.json`，并执行 `foreign_key_check`、`integrity_check`、证书/审计一致性检查。\n\nmanifest 关键值：\n\n```json\n{\n  \"tableCounts\": {\n    \"learners\": 100006,\n    \"enrollments\": 100008,\n    \"certificates\": 100002,\n    \"audit_events\": 100004\n  },\n  \"tenantCertificates\": { \"EAST\": 100000, \"WEST\": 2 },\n  \"verified\": {\n    \"exportLoadConsistency\": \"certs=99998 enrollments=99998 audits=99998 active=99998\",\n    \"foreignKeyCheck\": \"ok\",\n    \"integrityCheck\": \"ok\",\n    \"targetCertificateCount\": \"ok\"\n  }\n}\n```\n\n启动大库服务（另一个端口，避免覆盖默认库）：\n\n```bash\nADDR=:8081 DB=data/large-demo.db ./scripts/run.sh\nBASE_LARGE=http://localhost:8081\n```\n\nA6 实测命令：\n\n```bash\n# 完整导出 + 计时\ntime curl -s -o /tmp/certificates.csv \\\n  \"$BASE_LARGE/api/v1/certificates.csv?sortBy=issuedLocalDate&sortOrder=desc\" -H \"$ALICE\"\nwc -l /tmp/certificates.csv\nhead -1 /tmp/certificates.csv\n\n# 再导出一份，比对一致性\ntime curl -s -o /tmp/certificates-2.csv \\\n  \"$BASE_LARGE/api/v1/certificates.csv?sortBy=issuedLocalDate&sortOrder=desc\" -H \"$ALICE\"\nsha256sum /tmp/certificates.csv /tmp/certificates-2.csv\n\n# 固定搜索：姓名匹配 1,000 行，序列号精确 1 行\ncurl -s -o /tmp/learner007.csv \\\n  \"$BASE_LARGE/api/v1/certificates.csv?q=Load%20Learner%20007&sortBy=serialNumber&sortOrder=asc\" -H \"$ALICE\"\nwc -l /tmp/learner007.csv        # 1001\nhead -2 /tmp/learner007.csv\n\n# 导出期间列表仍可读\ncurl -s -o /tmp/export-during.csv \"$BASE_LARGE/api/v1/certificates.csv\" -H \"$ALICE\" &\ncurl -s -o /dev/null -w 'list=%{http_code} %{time_total}s\\n' \\\n  \"$BASE_LARGE/api/v1/certificates?page=1&pageSize=20\" -H \"$ALICE\"\nwait\n\n# West 仍只有 2 张\ncurl -s \"$BASE_LARGE/api/v1/certificates?pageSize=1\" -H \"$BOB\"\n```\n\n本环境实测（2026-10-27，WSL2 / Go 1.22.5 / Node 24.3.0）：\n\n- 生成耗时 **9.83s**，峰值内存约 114MB；\n- 完整导出 **0.397s**，5,800,049 字节，100,001 行；\n- 两次导出 SHA-256 相同；\n- 筛选 `Load Learner 007`：1,000 行，0.051s；\n- 导出期间列表请求：`200`，0.034s。\n\n中途读取错误（A6 的“截断下载必须失败”）通过测试注入：\n\n```bash\ngo test ./internal/httpapi -run TestCSVAbortOnMidStreamError -v\n```\n\n## 5. 自动化验证与 A1–A7 对照\n\n```bash\n./scripts/verify.sh\n# gofmt 检查 + go vet + go test -race ./... + 前端 TypeScript 检查/构建\n```\n\n| 场景 | 测试 | 覆盖点 |\n| --- | --- | --- |\n| A1 租户隔离 | `TestTenantIsolationA1` | 跨租户 404、列表/CSV 空结果、`tenantId` 400、`X-Tenant-Id` 忽略、跨租户 bulk 无副作用 |\n| A2 重试安全 | `TestBulkIdempotencyA2A3A4`、`TestBulkConcurrentSameKeyA2`、`TestIdempotencyKeyLifecycleAndScope` | 同键同课程 `200` 原样回放；8 并发只发一张证书；失败请求不消耗键 |\n| A3 键误用 | `TestBulkIdempotencyA2A3A4` | 同键不同课程 `409`，不覆盖、不二次执行 |\n| A4 学员结果 | `TestEnrollmentEligibilityA4`、`TestBulkIdempotencyA2A3A4` | `issued` / `skipped` 及三种原因、`learnerId ASC`、计数不变量 |\n| A5 DST 与本地日期 | `TestTimeAndLocalDateA5` | East/West 本地时间、本地日期、默认排序与次排序 |\n| A6 导出 | `TestCSVExportA6`、`TestCSVAbortOnMidStreamError` | 四列/CRLF/空结果/筛选/重复导出一致/中途错误中止连接 |\n| A7 吊销审计 | `TestRevocationA7` | 首次 `201`、重复与并发 `200`、仅一条 REVOKED 审计、跨租户 404 |\n\n其他已覆盖：`TestValidationRoutingAndHeaders`（400/401/404/405/415、`X-Request-Id`、`Cache-Control`）、`TestCSVFormulaAndQuoting`、`TestMultipleAuthorizationHeaders`。\n\n详细命令与边界见 [docs/verification.md](docs/verification.md)。\n\n## 6. Known defects（已知缺陷）\n\n| # | 缺陷 | 影响 | 规避/说明 |\n| --- | --- | --- | --- |\n| 1 | 批量发证弹窗关闭后，内存中的 `Idempotency-Key` 丢失 | 若请求实际已提交但响应丢失（500/503/断网），重新打开弹窗会用新键，可能多一条 `bulk_operations` 记录；证书唯一约束仍防止重复证书 | 在弹窗内使用“使用同一幂等键重试”；不要关闭后重开；刷新列表确认实际结果 |\n| 2 | 发证弹窗的报名预览只取前 100 条 | 大课程（如 `Export Load`）预览不完整；提交仍会处理全部报名 | UI 会提示“报名共 N 条，仅展示前 100 条” |\n| 3 | CSV 为 UTF-8 无 BOM | Excel 直接打开中文 CSV 可能误判编码 | 程序化消费/验收不受影响；需要 Excel 兼容时可加 BOM，但会改变字节比对 |\n| 4 | 前端完整引入 Element Plus | JS 约 1.0MB（gzip 322KB），Vite 报 chunk > 500KB | 首版以功能完整为先；后续可按需引入/代码分割 |\n| 5 | 默认库每个租户只有一张 ACTIVE 证书 | 重复跑 A7 后 Taylor 变 REVOKED，再演示“首次 201”会得到 200 | 重置 `data/demo.db*`，或使用新证书/新库 |\n| 6 | 演示鉴权是固定 token | 没有登录、token 签发、刷新或真实权限管理 | 题目只要求演示 actor；生产使用需替换认证层 |\n| 7 | `failed / ISSUANCE_ERROR` 与 `503` busy 分支缺少端到端触发 | 代码已实现，但默认数据没有自然失败场景；测试未强制耗尽 10s 锁等待 | 已知验证缺口，见下节 |\n| 8 | CSV 中途错误测试使用注入的读取错误 | 验证了连接中止语义，但不是物理磁盘故障 | 真实磁盘故障难以稳定复现；测试覆盖了协议行为 |\n\n## 7. Unfinished work（未完成工作）\n\n以下项目**未完成**，其中部分明确不在首版/题目范围内：\n\n- 为 `failed / ISSUANCE_ERROR` 增加可控的 E2E fixture（例如测试专用触发器或注入点），验证单学员失败后继续处理。\n- 强制制造 SQLite 锁等待耗尽，端到端验证 `503 + Retry-After`。\n- 用真实磁盘/读取故障验证 CSV 中途失败，而不是仅在测试中注入错误。\n- 可选接口 `GET /learners`（按姓名找 learnerId）和 `GET /bulk-operations/{operationId}`（刷新后恢复操作详情）未实现。\n- 异步批量任务、进度轮询、取消/重试队列未实现（题目未要求，首版为同步）。\n- 真实登录、token 签发/刷新、角色管理和密码流程未实现。\n- 审计查询 API 未实现；审计已持久化，但只能通过详情/测试/直接查库核对。\n- CSV BOM / Excel 兼容选项未实现。\n- 前端可访问性（键盘操作、焦点管理）和 Firefox/Safari/移动端人工验证未完成；自动化只覆盖 Chromium headless。\n- 题目第 6 节独立书面题不在本仓库范围内，应由候选人本人完成并单独声明。\n\n## 8. API 摘要与数据规则\n\n| 方法 | 路径（省略 `/api/v1`） | 说明 |\n| --- | --- | --- |\n| GET | `/me` | 当前管理员、租户、时区 |\n| GET | `/courses` | 本租户课程选项 |\n| GET | `/courses/{courseId}/enrollments` | 课程报名、完成状态、证书、发证资格 |\n| GET | `/learners/{learnerId}/enrollments` | 学员各课程报名 |\n| GET | `/certificates` | 搜索、筛选、排序、分页 |\n| GET | `/certificates/{id}` | 详情（UTC、本地时间、本地日期、发证/吊销人） |\n| POST | `/courses/{id}/bulk-operations` | 同步批量发证，必须带 `Idempotency-Key` |\n| PUT | `/certificates/{id}/revocation` | 吊销；重复请求幂等 |\n| GET | `/certificates.csv` | 流式 CSV，复用列表的筛选与排序 |\n\n完整契约见 [docs/API.md](docs/API.md)，数据模型见 [docs/data-model.md](docs/data-model.md)。\n\n### 关键语义\n\n- **租户隔离**：tenant 只由 token 解析；客户端提交 `tenantId` 返回 `400`，`X-Tenant-Id` 被忽略；跨租户路径资源统一 `404`，列表/CSV 过滤返回空结果。\n- **批量发证幂等**：作用域 `tenant + admin + key`。同键同课程返回已存结果（`200`），同键不同课程返回 `409`；首次提交 `201`。并发同键由写事务串行化，只产生一个逻辑结果。\n- **吊销**：`ACTIVE → REVOKED` 首次 `201`，重复 `200` 且不新增审计；吊销是终态，本题不重发。\n- **时间**：数据库存 UTC `YYYY-MM-DDTHH:mm:ss.SSSZ`；`issuedLocalDate` / `issuedLocalAt` 由租户 IANA 时区派生，不使用浏览器时区；时区数据随二进制嵌入。\n- **搜索**：学员姓名或序列号的字面子串，ASCII 不区分大小写，`%` / `_` 为普通字符。\n- **CSV**：固定四列、CRLF、UTF-8 无 BOM、公式注入防护；流式写出，中途读取错误会中止连接而不是保存截断文件。\n\n### 序列号规则\n\n| 来源 | 格式 | 示例 |\n| --- | --- | --- |\n| 在线发证 | `CERT-{TENANT_CODE}-{ULID}`（26 位 Crockford Base32） | `CERT-EAST-01M5Y8QM77F49S7Y0A5T1MC0DX` |\n| 默认种子 | `CERT-{TENANT}-{NAME}-0001` | `CERT-EAST-TAYLOR-0001` |\n| 大数据生成器 | `{TENANT}-LOAD-{i:06d}` | `EAST-LOAD-000007` |\n\n三类前缀互不冲突；在线序列号时间有序且无需回读。\n\n## 9. 默认演示数据\n\n每个租户 2 门课程、4 位学员、5 条报名、2 张证书、3 条审计；两租户合计 4 门课程、8 位学员、10 条报名、4 张证书、6 条审计。\n\n| 学员 | 课程 | 完成状态 | 初始证书 |\n| --- | --- | --- | --- |\n| Alex Lee | Safety 101 | COMPLETED | 无 |\n| Sam Chen | Safety 101 | INCOMPLETE | 无 |\n| Taylor Kim | Safety 101 | COMPLETED | ACTIVE |\n| Morgan Wu | Safety 101 | COMPLETED | REVOKED |\n| Alex Lee（同一人） | First Aid | COMPLETED | 无 |\n\nTaylor 的 `issued_at` 为 `2026-01-10T13:30:00.000Z`：East 展示 `2026-01-11T00:30:00.000+11:00`，West 展示 `2026-01-10T21:30:00.000+08:00`。\n\n## 10. 项目结构\n\n```text\ncmd/server/           Go HTTP 服务入口（API + 静态前端）\ncmd/seed-large/       100,000 行大数据生成器\ninternal/store/       连接池、迁移、默认种子\ninternal/service/     鉴权、查询、事务发证、吊销、CSV 流\ninternal/httpapi/     Gin 路由、校验、错误、CSV、集成测试\nmigrations/           嵌入式 SQL 迁移\nweb/                  Vue 3 + TypeScript + Element Plus 前端\nscripts/              一键运行 / 验证 / 大数据脚本\ndocs/                 架构、数据模型、API、验收记录\nai/                   AI 会话导出、索引、决策日志、完整性声明\n```\n\n## 11. AI 交付记录\n\n相关规划、环境失败运行、实现、前端修复和子代理会话的原生 JSON 导出、索引、决策日志及完整性声明均在 [ai/](ai/)。快照边界与导出限制见 [ai/completeness.md](ai/completeness.md)。\n",
+              "path": "/home/charles/code/OceanAI_CertifyCate_Homwork/README.md"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Wrote file successfully: README.md"
+              }
+            ],
+            "metadata": {
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1793094130717,
+            "ran": 1793094155615,
+            "completed": 1793094155653
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "10950dc8e6fc61f04e884ad027291f848b7d2406",
+        "end": "0f453a31e468d8faf61a3bf2e3855cf3b1f5d006",
+        "files": [
+          "README.md"
+        ]
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0.009965448,
+      "tokens": {
+        "input": 3056,
+        "output": 7028,
+        "reasoning": 7363,
+        "cache": {
+          "read": 290816,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cbd7dcb001ROS4oB00n6UgiY",
+      "time": {
+        "created": 1793094155734,
+        "streamed": 1793094165812,
+        "completed": 1793094165877
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "Need verify README accuracy and commands. Potential issues:\n- A2 expected `total=4 issued=1 skipped=3`; yes.\n- A3: If A2 run, `KEY` set in same shell. Good.\n- A4 table.\n- A5: after A2, East certs 3,4 plus Alex cert; sorting `issuedLocalDate` asc: Morgan Jan 10, Taylor Jan 11, Alex today Oct 27 -> IDs [4,3,5]? Wait A2 issues Alex certificate with issuedLocalDate = 2026-10-27 (today). If A5 executed after A2, list sorted asc would include Alex (Oct 27) last, so first two IDs are [4,3], but full list has 3 items. README says \"ids [4,3]\" which is incomplete after A2. Need adjust: A5 step after A2 has 3 certs. If A5 run on fresh DB (without A2), ids [4,3]. We state sequence A1→A2→A3→A4→A5; so A5 should expect 3 certs and IDs [4,3,5] (Alex's ID 5). The comment says \"→ ids [4,3]\" — inaccurate. Fix to \"前两条为 ids [4,3]（A2 后还会有一张当天发证的 Alex，排在最后）\". Or recommend run A5 before A2. Better adjust text.\n\n- A7 after A2: Taylor active, works. Certificate ID 3. Good.\n- A3 same key course 2: course 2 exists East, key from course1 -> 409. Good.\n- A1 cross-tenant bulk key `a1-cross` not stored; 404.\n- A1 `curl -s \"$BASE/api/v1/certificates.csv?courseId=3\"` returns header; good.\n- A6: `BASE_LARGE` defined in section 4 but A6 section references it before definition (A6 is section 3.6, then section 4 defines). README says \"见下一节 ... 完整命令\"; core snippet uses `$BASE_LARGE` not yet defined. Add a line in A6: `BASE_LARGE=http://localhost:8081` or tell set after starting. Better define at top of A6: \"先按下一节启动大库并设置 BASE_LARGE\". Add.\n- A6 `wc -l` 100001, correct.\n- A6 `curl -s ... | wc -l` for learner007 1001, correct.\n- A6 `curl ... &` output; good.\n- A7 `cmp` of first/repeat JSON: first `rev1.json` and repeat `rev2.json`; both bodies identical? First response has revokedAt/revokedBy, repeat same. Yes.\n- A7 `curl -s -o /dev/null -w` cross-tenant Bob; 404.\n- A7 audit test.\n- Section 4 manifest `tableCounts` omits some keys but valid excerpt; fine.\n- Section 4 says `EAST-LOAD-000001`–`EAST-LOAD-099998`; actual i=1..99998, yes.\n- Section 4 `Load Learner 000`–`099`; yes.\n- Section 4 generation \"约 10s\" and measured 9.83.\n- Known defects item 1: We say \"证书唯一约束仍防止重复证书\" true. But if a new key operation after commit, it will skip existing cert; extra bulk operation. Good.\n- Known defects item 2: UI preview pageSize 100; true.\n- Known defects item 6: fixed token; yes.\n- Unfinished item \"failed/503\" duplicated in defects; okay, but could be redundant. Fine.\n- Section 5 automated tests: `TestBulkConcurrentSameKeyA2` etc. Good.\n- Section 5 says `TestCSVAbortOnMidStreamError` \"中途错误中止连接\"; yes.\n- Section 1 `git clone` repo URL; remote exists.\n- `./scripts/run.sh` from clean clone uses npm ci; good.\n- `SKIP_WEB_BUILD=1` if dist missing -> server returns 503 frontend not built; README says \"已有 web/dist\". Good.\n- `make run` uses script.\n- Section 2 `curl -s \"$BASE/api/v1/me\" -H \"$ALICE\"`; shell variable with spaces in header value works as one arg. Good.\n- Section 2 says multiple Authorization -> 401; code.\n- Section 8 API summary.\n- Section 9 default data.\n\nNeed fix A5 ID expectation and A6 BASE_LARGE. Also maybe \"A5 recommended before A2\" to keep IDs; or adjust. Let's adjust to say \"如果先执行 A2，Alex 的当天证书会排在最后；前两条仍为 [4,3].\" That is accurate. Use `sortBy=issuedLocalDate&sortOrder=asc` and `jq`? We can't parse IDs easily; user can inspect. Say \"顺序为 Morgan(4) → Taylor(3) → Alex(新证书，当天日期)\". Good.\n\nA6 add:\n```\n# 先按下一节启动大库：\n# ADDR=:8081 DB=data/large-demo.db ./scripts/run.sh\nBASE_LARGE=http://localhost:8081\n```\nAt start of A6.\n\nAlso Section 3 heading anchor `#4-100000-row-generation100000-行生成` may be wrong. GitHub anchor for heading `## 4. 100,000-row generation（100,000 行生成）` likely `#4-100000-row-generation100000-行生成`? GitHub slug removes punctuation, keeps Chinese. Could be `#4-100000-row-generation100000-行生成`. The parenthesis full-width removed, comma removed. It might be `#4-100000-row-generation100000-行生成`. Fine, but if wrong, link broken. Simpler use plain text \"见下一节\" without anchor, or anchor `#4-100000-row-generation100000-行生成`. Keep but maybe avoid risk: change link to `[下一节](#4-100000-row-generation100000-行生成)`. GitHub likely handles. Could just say \"见下一节\". Let's simplify.\n\nAlso requirement \"known defects and unfinished work\" now explicit English headings. Good.\n\nNeed maybe include \"A1–A7 reproduction steps\" as a heading exactly; yes.\n\nNow check markdown lint? Not available. Fine.\n\nFix A5/A6.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793094157073,
+            "completed": 1793094165800
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_00_vqFSE0sjoNbDBrgkLqmP6484",
+          "name": "edit",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/home/charles/code/OceanAI_CertifyCate_Homwork/README.md",
+              "oldString": "# 按本地日期升序：Morgan（01-10）→ Taylor（01-11），ids [4,3]\ncurl -s \"$BASE/api/v1/certificates?sortBy=issuedLocalDate&sortOrder=asc\" -H \"$ALICE\"\n```",
+              "newString": "# 按本地日期升序：Morgan（01-10, id=4）→ Taylor（01-11, id=3）\n# 如果先执行了 A2，Alex 的当天证书会排在最后。\ncurl -s \"$BASE/api/v1/certificates?sortBy=issuedLocalDate&sortOrder=asc\" -H \"$ALICE\"\n```"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Edited README.md (1 replacement)"
+              }
+            ],
+            "metadata": {
+              "files": [
+                {
+                  "file": "README.md",
+                  "patch": "Index: README.md\n===================================================================\n--- README.md\n+++ README.md\n@@ -227,9 +227,10 @@\n # issuedLocalAt = 2026-01-10T21:30:00.000+08:00\n # issuedLocalDate = 2026-01-10\n # timezone = Australia/Perth\n \n-# 按本地日期升序：Morgan（01-10）→ Taylor（01-11），ids [4,3]\n+# 按本地日期升序：Morgan（01-10, id=4）→ Taylor（01-11, id=3）\n+# 如果先执行了 A2，Alex 的当天证书会排在最后。\n curl -s \"$BASE/api/v1/certificates?sortBy=issuedLocalDate&sortOrder=asc\" -H \"$ALICE\"\n ```\n \n **UI**：点击 Taylor 行打开详情抽屉，查看“租户本地时间”和“租户时区”。\n",
+                  "status": "modified",
+                  "additions": 2,
+                  "deletions": 1
+                }
+              ],
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1793094164537,
+            "ran": 1793094165808,
+            "completed": 1793094165821
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_01_LGR0KipEDSV6eZdvXEoS3595",
+          "name": "edit",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/home/charles/code/OceanAI_CertifyCate_Homwork/README.md",
+              "oldString": "### A6 导出增长（100,000 行）\n\n见下一节 [4. 100,000-row generation](#4-100000-row-generation100000-行生成) 的完整命令。核心验收：\n\n```bash\n# 大库启动后\ntime curl -s -o /tmp/certificates.csv \\",
+              "newString": "### A6 导出增长（100,000 行）\n\n完整生成/启动命令见下一节。先启动大库并设置地址：\n\n```bash\nBASE_LARGE=http://localhost:8081\n```\n\n核心验收：\n\n```bash\ntime curl -s -o /tmp/certificates.csv \\"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Edited README.md (1 replacement)"
+              }
+            ],
+            "metadata": {
+              "files": [
+                {
+                  "file": "README.md",
+                  "patch": "Index: README.md\n===================================================================\n--- README.md\n+++ README.md\n@@ -236,12 +236,17 @@\n **UI**：点击 Taylor 行打开详情抽屉，查看“租户本地时间”和“租户时区”。\n \n ### A6 导出增长（100,000 行）\n \n-见下一节 [4. 100,000-row generation](#4-100000-row-generation100000-行生成) 的完整命令。核心验收：\n+完整生成/启动命令见下一节。先启动大库并设置地址：\n \n ```bash\n-# 大库启动后\n+BASE_LARGE=http://localhost:8081\n+```\n+\n+核心验收：\n+\n+```bash\n time curl -s -o /tmp/certificates.csv \\\n   \"$BASE_LARGE/api/v1/certificates.csv?sortBy=issuedLocalDate&sortOrder=desc\" -H \"$ALICE\"\n wc -l /tmp/certificates.csv        # 100001\n head -1 /tmp/certificates.csv      # learnerName,courseTitle,serialNumber,issuedLocalDate\n",
+                  "status": "modified",
+                  "additions": 7,
+                  "deletions": 2
+                }
+              ],
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1793094165171,
+            "ran": 1793094165811,
+            "completed": 1793094165826
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "0f453a31e468d8faf61a3bf2e3855cf3b1f5d006",
+        "end": "ab82a8d468b602b77737f697dfc78e9510d32b62",
+        "files": [
+          "README.md"
+        ]
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0.002938674,
+      "tokens": {
+        "input": 6075,
+        "output": 437,
+        "reasoning": 1431,
+        "cache": {
+          "read": 302208,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cbda588001R2WhhYyfgWeasP",
+      "time": {
+        "created": 1793094165906,
+        "streamed": 1793094167812,
+        "completed": 1793094167862
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "Wait the edit for A6 likely left a dangling code block issue. Let's inspect around A6.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793094167155,
+            "completed": 1793094167805
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_00_pvEFyIQCB14nFhkmsNic3195",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "grep -n \"A6 导出增长\" -A 32 README.md; echo ---; grep -n \"A5 DST\" -A 30 README.md"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "238:### A6 导出增长（100,000 行）\n239-\n240-完整生成/启动命令见下一节。先启动大库并设置地址：\n241-\n242-```bash\n243-BASE_LARGE=http://localhost:8081\n244-```\n245-\n246-核心验收：\n247-\n248-```bash\n249-time curl -s -o /tmp/certificates.csv \\\n250-  \"$BASE_LARGE/api/v1/certificates.csv?sortBy=issuedLocalDate&sortOrder=desc\" -H \"$ALICE\"\n251-wc -l /tmp/certificates.csv        # 100001\n252-head -1 /tmp/certificates.csv      # learnerName,courseTitle,serialNumber,issuedLocalDate\n253-```\n254-\n255-预期：`200`，约 0.4s（本环境），100,001 行（表头 + 100,000 张 East 证书）；两次导出 SHA-256 相同；导出期间列表仍返回 `200`。\n256-\n257-### A7 吊销与审计\n258-\n259-**目标**：首次吊销 `201` 并写一条审计；重复/并发吊销 `200`，不新增审计、不改变第一次时间和操作者。\n260-\n261-```bash\n262-# 首次 ACTIVE → REVOKED → 201\n263-curl -s -o /tmp/rev1.json -w 'first=%{http_code}\\n' \\\n264-  -X PUT \"$BASE/api/v1/certificates/3/revocation\" \\\n265-  -H \"$ALICE\" -H 'Content-Type: application/json' -d '{}'\n266-\n267-# 重复吊销 → 200，revokedAt/revokedBy 与第一次相同\n268-curl -s -o /tmp/rev2.json -w 'repeat=%{http_code}\\n' \\\n269-  -X PUT \"$BASE/api/v1/certificates/3/revocation\" -H \"$ALICE\"\n270-cmp /tmp/rev1.json /tmp/rev2.json && echo 'identical revocation'\n---\n214:### A5 DST 与本地日期\n215-\n216-**目标**：UTC 事实按租户 IANA 时区派生本地日期/时间，不写死偏移、不使用浏览器时区。\n217-\n218-```bash\n219-# East Taylor：issued_at=2026-01-10T13:30:00.000Z\n220-curl -s \"$BASE/api/v1/certificates/3\" -H \"$ALICE\"\n221-# issuedLocalAt = 2026-01-11T00:30:00.000+11:00\n222-# issuedLocalDate = 2026-01-11\n223-# timezone = Australia/Sydney\n224-\n225-# West Taylor：同一 UTC 时刻\n226-curl -s \"$BASE/api/v1/certificates/1\" -H \"$BOB\"\n227-# issuedLocalAt = 2026-01-10T21:30:00.000+08:00\n228-# issuedLocalDate = 2026-01-10\n229-# timezone = Australia/Perth\n230-\n231-# 按本地日期升序：Morgan（01-10, id=4）→ Taylor（01-11, id=3）\n232-# 如果先执行了 A2，Alex 的当天证书会排在最后。\n233-curl -s \"$BASE/api/v1/certificates?sortBy=issuedLocalDate&sortOrder=asc\" -H \"$ALICE\"\n234-```\n235-\n236-**UI**：点击 Taylor 行打开详情抽屉，查看“租户本地时间”和“租户时区”。\n237-\n238-### A6 导出增长（100,000 行）\n239-\n240-完整生成/启动命令见下一节。先启动大库并设置地址：\n241-\n242-```bash\n243-BASE_LARGE=http://localhost:8081\n244-```\n--\n393:| A5 DST 与本地日期 | `TestTimeAndLocalDateA5` | East/West 本地时间、本地日期、默认排序与次排序 |\n394-| A6 导出 | `TestCSVExportA6`、`TestCSVAbortOnMidStreamError` | 四列/CRLF/空结果/筛选/重复导出一致/中途错误中止连接 |\n395-| A7 吊销审计 | `TestRevocationA7` | 首次 `201`、重复与并发 `200`、仅一条 REVOKED 审计、跨租户 404 |\n396-\n397-其他已覆盖：`TestValidationRoutingAndHeaders`（400/401/404/405/415、`X-Request-Id`、`Cache-Control`）、`TestCSVFormulaAndQuoting`、`TestMultipleAuthorizationHeaders`。\n398-\n399-详细命令与边界见 [docs/verification.md](docs/verification.md)。\n400-\n401-## 6. Known defects（已知缺陷）\n402-\n403-| # | 缺陷 | 影响 | 规避/说明 |\n404-| --- | --- | --- | --- |\n405-| 1 | 批量发证弹窗关闭后，内存中的 `Idempotency-Key` 丢失 | 若请求实际已提交但响应丢失（500/503/断网），重新打开弹窗会用新键，可能多一条 `bulk_operations` 记录；证书唯一约束仍防止重复证书 | 在弹窗内使用“使用同一幂等键重试”；不要关闭后重开；刷新列表确认实际结果 |\n406-| 2 | 发证弹窗的报名预览只取前 100 条 | 大课程（如 `Export Load`）预览不完整；提交仍会处理全部报名 | UI 会提示“报名共 N 条，仅展示前 100 条” |\n407-| 3 | CSV 为 UTF-8 无 BOM | Excel 直接打开中文 CSV 可能误判编码 | 程序化消费/验收不受影响；需要 Excel 兼容时可加 BOM，但会改变字节比对 |\n408-| 4 | 前端完整引入 Element Plus | JS 约 1.0MB（gzip 322KB），Vite 报 chunk > 500KB | 首版以功能完整为先；后续可按需引入/代码分割 |\n409-| 5 | 默认库每个租户只有一张 ACTIVE 证书 | 重复跑 A7 后 Taylor 变 REVOKED，再演示“首次 201”会得到 200 | 重置 `data/demo.db*`，或使用新证书/新库 |\n410-| 6 | 演示鉴权是固定 token | 没有登录、token 签发、刷新或真实权限管理 | 题目只要求演示 actor；生产使用需替换认证层 |\n411-| 7 | `failed / ISSUANCE_ERROR` 与 `503` busy 分支缺少端到端触发 | 代码已实现，但默认数据没有自然失败场景；测试未强制耗尽 10s 锁等待 | 已知验证缺口，见下节 |\n412-| 8 | CSV 中途错误测试使用注入的读取错误 | 验证了连接中止语义，但不是物理磁盘故障 | 真实磁盘故障难以稳定复现；测试覆盖了协议行为 |\n413-\n414-## 7. Unfinished work（未完成工作）\n415-\n416-以下项目**未完成**，其中部分明确不在首版/题目范围内：\n417-\n418-- 为 `failed / ISSUANCE_ERROR` 增加可控的 E2E fixture（例如测试专用触发器或注入点），验证单学员失败后继续处理。\n419-- 强制制造 SQLite 锁等待耗尽，端到端验证 `503 + Retry-After`。\n420-- 用真实磁盘/读取故障验证 CSV 中途失败，而不是仅在测试中注入错误。\n421-- 可选接口 `GET /learners`（按姓名找 learnerId）和 `GET /bulk-operations/{operationId}`（刷新后恢复操作详情）未实现。\n422-- 异步批量任务、进度轮询、取消/重试队列未实现（题目未要求，首版为同步）。\n423-- 真实登录、token 签发/刷新、角色管理和密码流程未实现。\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1793094167595,
+            "ran": 1793094167810,
+            "completed": 1793094167845
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "ab82a8d468b602b77737f697dfc78e9510d32b62",
+        "end": "ab82a8d468b602b77737f697dfc78e9510d32b62",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0.001012398,
+      "tokens": {
+        "input": 169,
+        "output": 74,
+        "reasoning": 21,
+        "cache": {
+          "read": 310016,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cbdad49001NXcgq6qY42xSK5",
+      "time": {
+        "created": 1793094167890,
+        "streamed": 1793094174345,
+        "completed": 1793094179351
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "A6 says \"先启动大库\" but only sets variable, doesn't show start command; full command next section. Better add the actual start command or say \"按下一节\". It says \"先启动大库并设置地址\" but only sets address. Add:\n```bash\n# 终端 A：生成并启动大库（见下一节）\nADDR=:8081 DB=data/large-demo.db ./scripts/run.sh\n# 终端 B：\nBASE_LARGE=...\n```\nBut generation must happen first; next section has. Maybe rewrite:\n```\n完整生成/启动命令见下一节。启动后在新终端设置：\n```\nThat's accurate. Change \"先启动大库并设置地址\" to \"启动大库后，在新终端设置地址\". Good.\n\nAlso A1 section `curl -s -o /dev/null -w` cross-tenant bulk returns 404; fine.\n\nNow, requirement \"one-command startup\" may be judged by README starting with that; yes.\n\nNeed verify README commands (at least key ones) by running against server. We have a fresh server? We killed 18085/18081. Could run a fresh default demo server on 18086 and execute A1–A5/A7 curl commands quickly to ensure no mistakes. Let's do a scripted smoke of README commands. Start server on 18086 with fresh DB, run:\n- A1 commands statuses\n- A2 bulk, replay, cmp\n- A3 409\n- A4 response\n- A5 detail\n- A7 revoke/repeat\nThis will validate. Use bash with `set -e` and assertions. Also check `KEY` behavior.\n\nStart server, run.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793094169221,
+            "completed": 1793094174327
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_00_1jNgJytQjVjv2Lzzld4y3556",
+          "name": "edit",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "path": "/home/charles/code/OceanAI_CertifyCate_Homwork/README.md",
+              "oldString": "完整生成/启动命令见下一节。先启动大库并设置地址：",
+              "newString": "完整生成/启动命令见下一节。启动大库后，在新终端设置地址："
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Edited README.md (1 replacement)"
+              }
+            ],
+            "metadata": {
+              "files": [
+                {
+                  "file": "README.md",
+                  "patch": "Index: README.md\n===================================================================\n--- README.md\n+++ README.md\n@@ -236,9 +236,9 @@\n **UI**：点击 Taylor 行打开详情抽屉，查看“租户本地时间”和“租户时区”。\n \n ### A6 导出增长（100,000 行）\n \n-完整生成/启动命令见下一节。先启动大库并设置地址：\n+完整生成/启动命令见下一节。启动大库后，在新终端设置地址：\n \n ```bash\n BASE_LARGE=http://localhost:8081\n ```\n",
+                  "status": "modified",
+                  "additions": 1,
+                  "deletions": 1
+                }
+              ],
+              "truncated": false
+            }
+          },
+          "time": {
+            "created": 1793094171338,
+            "ran": 1793094174340,
+            "completed": 1793094174369
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_01_JAkFgw35KME0SVeE9tIl6331",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "go build -o /tmp/opencode/certadmin ./cmd/server; fuser -k 18086/tcp 2>/dev/null || true; sleep 1; rm -rf data/readme-check.db*; (/tmp/opencode/certadmin --db data/readme-check.db --addr :18086 > /tmp/opencode/readme-check.log 2>&1 &) ; sleep 2; BASE=http://localhost:18086; ALICE='Authorization: Bearer demo-alice-token'; BOB='Authorization: Bearer demo-bob-token'; echo \"A1 east=$(curl -s \"$BASE/api/v1/certificates\" -H \"$ALICE\" | python3 -c 'import sys,json;print(json.load(sys.stdin)[\"total\"])') west=$(curl -s \"$BASE/api/v1/certificates\" -H \"$BOB\" | python3 -c 'import sys,json;print(json.load(sys.stdin)[\"total\"])')\"; echo \"cross_detail=$(curl -s -o /dev/null -w '%{http_code}' \"$BASE/api/v1/certificates/1\" -H \"$ALICE\") cross_bulk=$(curl -s -o /dev/null -w '%{http_code}' -X POST \"$BASE/api/v1/courses/3/bulk-operations\" -H \"$ALICE\" -H 'Idempotency-Key: a1-cross' -H 'Content-Type: application/json' -d '{}') tenant_q=$(curl -s -o /dev/null -w '%{http_code}' \"$BASE/api/v1/certificates?tenantId=1\" -H \"$ALICE\")\"; KEY=\"a2-$(date +%s)\"; echo \"A2 first=$(curl -s -o /tmp/opencode/a2-first.json -w '%{http_code}' -X POST \"$BASE/api/v1/courses/1/bulk-operations\" -H \"$ALICE\" -H \"Idempotency-Key: $KEY\" -H 'Content-Type: application/json' -d '{}') replay=$(curl -s -o /tmp/opencode/a2-replay.json -w '%{http_code}' -X POST \"$BASE/api/v1/courses/1/bulk-operations\" -H \"$ALICE\" -H \"Idempotency-Key: $KEY\" -H 'Content-Type: application/json' -d '{}') identical=$(cmp -s /tmp/opencode/a2-first.json /tmp/opencode/a2-replay.json && echo yes || echo no) total=$(curl -s \"$BASE/api/v1/certificates\" -H \"$ALICE\" | python3 -c 'import sys,json;print(json.load(sys.stdin)[\"total\"])')\"; echo \"A3=$(curl -s -o /dev/null -w '%{http_code}' -X POST \"$BASE/api/v1/courses/2/bulk-operations\" -H \"$ALICE\" -H \"Idempotency-Key: $KEY\" -H 'Content-Type: application/json' -d '{}')\"; echo \"A5 east=$(curl -s \"$BASE/api/v1/certificates/3\" -H \"$ALICE\" | python3 -c 'import sys,json;print(json.load(sys.stdin)[\"issuedLocalAt\"])') west=$(curl -s \"$BASE/api/v1/certificates/1\" -H \"$BOB\" | python3 -c 'import sys,json;print(json.load(sys.stdin)[\"issuedLocalAt\"])')\"; echo \"A7 first=$(curl -s -o /tmp/opencode/rev1.json -w '%{http_code}' -X PUT \"$BASE/api/v1/certificates/3/revocation\" -H \"$ALICE\" -H 'Content-Type: application/json' -d '{}') repeat=$(curl -s -o /tmp/opencode/rev2.json -w '%{http_code}' -X PUT \"$BASE/api/v1/certificates/3/revocation\" -H \"$ALICE\") identical=$(cmp -s /tmp/opencode/rev1.json /tmp/opencode/rev2.json && echo yes || echo no)\"; fuser -k 18086/tcp 2>/dev/null || true; sleep 1; rm -rf data/readme-check.db*",
+              "timeout": 300000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "A1 east=2 west=2\ncross_detail=404 cross_bulk=404 tenant_q=400\nA2 first=201 replay=200 identical=yes total=3\nA3=409\nA5 east=2026-01-11T00:30:00.000+11:00 west=2026-01-10T21:30:00.000+08:00\nA7 first=201 repeat=200 identical=yes\n 574570"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1793094171646,
+            "ran": 1793094174343,
+            "completed": 1793094179281
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "ab82a8d468b602b77737f697dfc78e9510d32b62",
+        "end": "9005c1d301166777a4c92ec2104a9277ba540306",
+        "files": [
+          "README.md"
+        ]
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0.002081616,
+      "tokens": {
+        "input": 1828,
+        "output": 1101,
+        "reasoning": 360,
+        "cache": {
+          "read": 310272,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cbdda2a001iCHdEsxl3xhp5O",
+      "time": {
+        "created": 1793094179381,
+        "streamed": 1793094182328,
+        "completed": 1793094182372
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "README commands validated.\n\nNeed check A6 `scripts/seed-large.sh` and large server commands. Already tested; but README says `rm -f data/large-demo.db* data/large-demo.manifest.json`; shell glob `data/large-demo.db*` matches `.db`, `.db-wal`, `.db-shm`; good. If file exists, script refuses; removal handles.\n- Starting large server with `ADDR=:8081 DB=... ./scripts/run.sh` builds frontend; fine.\n- `BASE_LARGE` set.\n- `time curl` output; fine.\n- `sha256sum` equal.\n- `wc -l` 1001 filtered; yes.\n- During export `curl ... &` and wait; shell job control works.\n- `go test` path.\n\nOne issue: README A6 says \"两次导出 SHA-256 相同\" but the core snippet doesn't show second export; section 4 does. Fine.\n\nOne issue: A6 `time curl ...` in zsh/bash; fine.\n\nOne issue: Section 3 A2 `KEY` variable used in A3; if user runs each block in a separate shell, note. Good.\n\nOne issue: A7 \"审计条数没有查询 API\" and test direct DB; good.\n\nNeed maybe add \"one-command startup\" command to `README` at very top and \"push first version\". Good.\n\nNow check README section anchors/links:\n- `#4-100000-row-generation100000-行生成` removed? We replaced with \"下一节\". Search for anchor.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793094180147,
+            "completed": 1793094182322
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_00_p6Bp2kxLHQx6VZYWl6gV4372",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "grep -n '](#' README.md; echo ---; grep -n '^## \\|^### ' README.md | head -60; echo ---; wc -l README.md"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "---\n10:## 1. One-command startup（一键启动）\n58:### 界面\n68:## 2. Actors, tokens and headers（身份与请求头）\n95:## 3. A1–A7 reproduction steps（复现步骤）\n110:### A1 租户隔离\n146:### A2 重试安全\n176:### A3 键误用\n195:### A4 学员结果\n214:### A5 DST 与本地日期\n238:### A6 导出增长（100,000 行）\n257:### A7 吊销与审计\n288:## 4. 100,000-row generation（100,000 行生成）\n380:## 5. 自动化验证与 A1–A7 对照\n401:## 6. Known defects（已知缺陷）\n414:## 7. Unfinished work（未完成工作）\n429:## 8. API 摘要与数据规则\n445:### 关键语义\n454:### 序列号规则\n464:## 9. 默认演示数据\n478:## 10. 项目结构\n493:## 11. AI 交付记录\n---\n495 README.md\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1793094182048,
+            "ran": 1793094182327,
+            "completed": 1793094182359
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "9005c1d301166777a4c92ec2104a9277ba540306",
+        "end": "9005c1d301166777a4c92ec2104a9277ba540306",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0.001223616,
+      "tokens": {
+        "input": 216,
+        "output": 79,
+        "reasoning": 339,
+        "cache": {
+          "read": 313472,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cbde5f6001ePNTYkAoHwvA5m",
+      "time": {
+        "created": 1793094182399,
+        "streamed": 1793094186964,
+        "completed": 1793094187001
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "README 495 lines. Good.\n\nNeed maybe include \"Known defects\" and \"Unfinished work\" in English/Chinese headings, yes.\n\nNow update docs/verification? It already has detailed verification. README references docs. Fine.\n\nNeed update AI session exports/records after this README change? The current session `ses_e834...` already exported before README rewrite. The new README work is not in export. Requirement says sessions should be retained; ideally re-export at end. We can re-export this session, update end time, checksums, index. This will add the README work. Then commit README and AI refresh, then push. But if we re-export before committing README, export includes README content (via write tool), good. The commit hash won't be in export. Fine.\n\nDo:\n1. `git diff` review README maybe.\n2. `./scripts/verify.sh` (code unchanged, but frontend build; docs only). Not necessary but run quick `npm run build`? README no code. We validated commands. Maybe no need full verify; but final push should be green. Run `./scripts/verify.sh` once more? It takes ~5s. Do it.\n3. Re-export new session (`ses_e834...`), update index end and checksums, completeness table end. Add related commit? README commit hash unknown. We can commit README first, then re-export and update AI with hash in a second commit. Or combine README + AI refresh in one commit: stage README and AI changes, but hash unknown for index. Not critical. Simpler:\n   - Commit README (and maybe docs) as `docs: restructure README for acceptance checklist`.\n   - Get hash.\n   - Re-export session, update index end/related commit (add README commit), checksums, completeness; commit AI refresh.\n   - Push both.\n4. Push `origin master`.\n\nNeed ensure remote branch is behind? `git status` says tracking origin/master at 3ed6411; remote might have new commits from user? Check `git fetch` before push. Do after commits: `git fetch origin`, check. If remote has diverged, need rebase/merge. Probably not.\n\nLet's check README diff for any errors.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793094183985,
+            "completed": 1793094186958
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_00_DjgmlEgPGB27JzvmLfsy2910",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "git diff --stat; git diff -- README.md | head -80"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": " README.md | 487 ++++++++++++++++++++++++++++++++++++++++++++++++++------------\n 1 file changed, 399 insertions(+), 88 deletions(-)\ndiff --git a/README.md b/README.md\nindex 5a59eb0..8fa0ad1 100644\n--- a/README.md\n+++ b/README.md\n@@ -7,153 +7,475 @@\n - 运行形态：单个 Go 进程同时提供 `/api/v1` 和构建后的前端静态文件\n - 数据：SQLite WAL，独立写连接 + 多读连接；默认库 `data/demo.db`\n \n-## 快速启动\n+## 1. One-command startup（一键启动）\n \n-环境要求：Go 1.22.5、Node.js 20.19+（实测 24.3.0）、npm。\n+环境要求：**Go 1.22.5+**、**Node.js 20.19+**（实测 24.3.0）、npm。\n \n ```bash\n+git clone https://github.com/WiccyCheng/certificate-admin-console.git\n+cd certificate-admin-console\n ./scripts/run.sh\n # 打开 http://localhost:8080\n ```\n \n-首次运行会安装前端依赖（若 `web/node_modules` 不存在）、构建前端、创建并初始化 `data/demo.db`。重复启动不会重置已有数据。\n+这一条命令会：\n+\n+1. 若 `web/node_modules` 不存在，执行 `npm ci`；\n+2. 构建前端到 `web/dist`；\n+3. 启动 Go 服务，创建并初始化 `data/demo.db`（仅首次）。\n+\n+重复启动不会重置已有数据。需要重置演示库时先停止服务：\n+\n+```bash\n+rm -rf data/demo.db*\n+./scripts/run.sh\n+```\n+\n+常用变体：\n \n ```bash\n-# 换端口或换库\n+# 换端口 / 换数据库\n ADDR=:8081 ./scripts/run.sh\n DB=data/another.db ./scripts/run.sh\n+\n+# 已有 web/dist，跳过前端构建\n+SKIP_WEB_BUILD=1 ./scripts/run.sh\n+\n+# Makefile 等价入口\n+make run\n ```\n \n-演示身份（前端右上角切换，后端只信 Bearer token）：\n+开发模式（前端热更新）：\n+\n+```bash\n+# 终端 1\n+go run ./cmd/server --db data/demo.db --addr :8080\n+\n+# 终端 2\n+cd web && npm install && npm run dev   # http://localhost:5173，/api 代理到 :8080\n+```\n+\n+### 界面\n+\n+| 证书列表 | 批量发证与逐学员结果 |\n+| --- | --- |\n+| ![证书列表](docs/screenshots/list.png) | ![批量发证](docs/screenshots/bulk-issue.png) |\n+\n+| 证书详情（A5 本地时间） |\n+| --- |\n+| ![证书详情](docs/screenshots/detail.png) |\n+\n+## 2. Actors, tokens and headers（身份与请求头）\n+\n+服务端只信 `Authorization` 请求头，tenant 由 token 派生，客户端不能自选租户。\n \n | actor | token | 租户 | 时区 |\n | --- | --- | --- | --- |\n | alice@east.test | `demo-alice-token` | East | `Australia/Sydney` |\n | bob@west.test | `demo-bob-token` | West | `Australia/Perth` |\n \n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1793094186842,
+            "ran": 1793094186963,
+            "completed": 1793094186988
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "9005c1d301166777a4c92ec2104a9277ba540306",
+        "end": "9005c1d301166777a4c92ec2104a9277ba540306",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0.001322952,
+      "tokens": {
+        "input": 396,
+        "output": 51,
+        "reasoning": 485,
+        "cache": {
+          "read": 313984,
+          "write": 0
+        }
+      }
+    },
+    {
+      "id": "msg_17cbdf80b001rZsUm8XmZO3TTC",
+      "time": {
+        "created": 1793094187029,
+        "streamed": 1793094188614,
+        "completed": 1793094192016
+      },
+      "type": "assistant",
+      "agent": "build",
+      "model": {
+        "id": "deepseek-flash",
+        "providerID": "deepseek",
+        "variant": "max"
+      },
+      "content": [
+        {
+          "type": "reasoning",
+          "text": "Looks good.\n\nOne concern: The `git clone` URL includes actual repo; okay. But if user clones private repo, fine.\n\nNow run verify (docs only but ensure). Then commit README.",
+          "native": {
+            "reasoningField": "reasoning_content"
+          },
+          "time": {
+            "created": 1793094187933,
+            "completed": 1793094188609
+          }
+        },
+        {
+          "type": "tool",
+          "id": "call_00_8k7XUck9yJhMY6vwF3Q29709",
+          "name": "shell",
+          "executed": false,
+          "state": {
+            "status": "completed",
+            "input": {
+              "command": "./scripts/verify.sh > /tmp/opencode/verify-readme.log 2>&1; echo \"EXIT:$?\"; tail -3 /tmp/opencode/verify-readme.log; git add README.md && git commit -q -m \"docs: align README with acceptance checklist and reproduction steps\" && git log --oneline -1",
+              "timeout": 900000
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "EXIT:0\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n✓ built in 442ms\nVerification passed.\nc023257 docs: align README with acceptance checklist and reproduction steps\n"
+              }
+            ],
+            "metadata": {
+              "status": "completed",
+              "truncated": false,
+              "exit": 0
+            }
+          },
+          "time": {
+            "created": 1793094188334,
+            "ran": 1793094188613,
+            "completed": 1793094192005
+          }
+        }
+      ],
+      "snapshot": {
+        "start": "9005c1d301166777a4c92ec2104a9277ba540306",
+        "end": "9005c1d301166777a4c92ec2104a9277ba540306",
+        "files": []
+      },
+      "finish": "tool-calls",
+      "rawFinish": "tool_calls",
+      "cost": 0.00117219,
+      "tokens": {
+        "input": 837,
+        "output": 129,
+        "reasoning": 41,
+        "cache": {
+          "read": 314880,
           "write": 0
         }
       }
