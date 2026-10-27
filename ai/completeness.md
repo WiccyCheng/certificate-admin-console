@@ -21,7 +21,7 @@
 | `ses_e83c45577ffe7XVpJjicbHpDmr` | 07:20–08:37 | chore worker：仓库准备与文档提交 | `sessions/ses_e83c45577ffe7XVpJjicbHpDmr.json` |
 | `ses_e83b56706ffeQp37rqQjjsiYhs` | 07:37–07:52 | Codex TUI 启动失败排查（环境失败运行，未参与实现） | `sessions/ses_e83b56706ffeQp37rqQjjsiYhs.json` |
 | `ses_e83a03f94ffe58RDubNXem0S7l` | 08:00–08:35 | REST API 设计与 A1–A7 对照（规划） | `sessions/ses_e83a03f94ffe58RDubNXem0S7l.json` |
-| `ses_e837cb6b6ffeMafvJ2NSUF13hQ` | 08:39–09:04（快照） | 后端、前端、验证与文档实现（本会话） | `sessions/ses_e837cb6b6ffeMafvJ2NSUF13hQ.json` |
+| `ses_e837cb6b6ffeMafvJ2NSUF13hQ` | 08:39–09:06（快照） | 后端、前端、验证与文档实现（本会话） | `sessions/ses_e837cb6b6ffeMafvJ2NSUF13hQ.json` |
 | `ses_e837cac7affeIzJADBnMykgbA7` | 08:39:03–08:39:16 | 子代理：启动连通性检查与仓库扫描 | `sessions/ses_e837cac7affeIzJADBnMykgbA7.json` |
 
 索引见 `session-index.csv`；校验和见 `session-checksums.sha256`。
