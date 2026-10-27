@@ -1,6 +1,6 @@
 # Certificate Admin Console REST API 契约
 
-状态：v1 契约草案，已按《Ocean AI Labs Beijing Technical Interview Assessment - 20261.pdf》（20261026）的必做范围和 A1–A7 逐项核对，待最终确认后冻结。本文是 API 实现的唯一依据；架构草案第 6 节只保留边界说明。
+状态：v1 契约已冻结，并作为实现与自动化测试的唯一依据。已按《Ocean AI Labs Beijing Technical Interview Assessment - 20261.pdf》（20261026）的必做范围和 A1–A7 逐项核对；实现与验收结果见 [README](../README.md) 和 [verification.md](verification.md)。架构草案第 6 节只保留边界说明。
 
 约定：统一前缀 `/api/v1`，JSON 字段使用 camelCase。题目中的“用户”在数据模型中对应学员 Learner；管理员 Admin 是操作人。课程完成状态属于 Enrollment，证书状态属于 Certificate，两者分别返回，不能用一个 `status` 代替。
 
@@ -1004,7 +1004,7 @@ Load Learner 007,Export Load,EAST-LOAD-000007,2026-01-09
 9. **固定 CSV 行为**：不传分页、固定四列、CRLF、UTF-8 无 BOM、RFC 4180 转义、公式注入防护、空结果只有表头、响应头前错误用 JSON、响应头后错误中止连接并用下载失败验证。
 10. **补充逐学员 `learnerName`**：初稿只有 `learnerId`，UI 无法独立展示结果；现在结果自包含。报名列表的证书摘要也补充 `issuedAt` / `issuedLocalDate`。
 
-仍需产品确认的取舍：
+实现采用的取舍（已确认）：
 
 - **可选接口**：`GET /learners`（按姓名找 learnerId）和 `GET /bulk-operations/{operationId}`（刷新后读取历史操作）不在首版。如果 UI 需要独立的学员搜索页或刷新后恢复操作详情，应在实现前加入；当前流程可从课程报名列表取得 learnerId，并用原幂等键重试恢复结果。
 - **A3 的“request payload”**：本接口的唯一业务参数是路径 `courseId`，body 固定为空/`{}`，不参与业务指纹。因此 A3 的同键复用测试以不同 `courseId` 验证；任何 body 成员（包括 `tenantId`）都是非法请求，统一 `400`，避免与“未知字段 400”的规则冲突。若未来增加可变业务字段，必须把它们纳入规范化和指纹，并定义其 `409` 语义。

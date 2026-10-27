@@ -1,6 +1,6 @@
 # 数据模型与演示数据约定
 
-状态：已确认。用户已确认本文的数据模型约定及 [schema.sql](schema.sql) 参考 DDL，包含业务状态、命名、字段、约束和生成数据规则；尚未接入应用或生成脚本。API 契约另见 [API.md](API.md)，已按题目 A1–A7 核对，待最终确认。
+状态：已确认并落地。本文的数据模型约定及 [schema.sql](schema.sql) 参考 DDL 已实现为 [migrations/001_init.sql](../migrations/001_init.sql)，接入应用、种子和 100,000 行生成器；业务状态、命名、字段、约束和生成数据规则均已验证。API 契约另见已冻结的 [API.md](API.md)，验收结果见 [verification.md](verification.md)。
 
 ## 1. 持久化与租户隔离
 
@@ -122,11 +122,11 @@ DDL 包含以下数据库保证：
 
 注意：`(tenant_id, course_id, learner_id)` 唯一约束是“吊销为终态、不重发”的实现基础。如果后续允许吊销后重新发证，需要改成只约束 ACTIVE 证书的部分唯一索引，并重新定义审计、幂等结果和列表语义；本题当前不采用该扩展。
 
-在线发证的序列号规则尚未固定，实现时需定义并写入 README。建议使用 `CERT-{tenantCode}-{UUID/ULID}` 这类全局唯一、无需回读的值；种子和 large generator 使用各自确定性前缀，避免与在线格式冲突。
+在线发证的序列号规则已固定为 `CERT-{TENANT_CODE}-{ULID}`（26 位 Crockford Base32，时间有序），全局唯一且无需回读；种子使用 `CERT-{TENANT}-{NAME}-0001`，large generator 使用 `{TENANT}-LOAD-{i:06d}`，三类前缀互不冲突。规则同时记录在 [README](../README.md)。
 
 发证事务：权限确认 → BEGIN IMMEDIATE → 查询幂等键/比较请求指纹 → 新请求生成 operation UUID → 逐学员发证与审计 → 写入最终 bulk_operations → COMMIT。证书引用操作的外键延迟到提交检查，因此不需要先写一条处理中操作或占位 JSON。同键不同课程返回 409；跨租户课程先返回 404，不创建操作。
 
-request_json 是校验后、规范化的业务请求，不是原始字节；request_hash 为其 SHA-256。当前唯一业务参数是课程，因此规范化请求为 `{"courseId": N}`；后续任何会改变语义的参数必须参与指纹。重放按 tenant_id 和 actor_admin_id 隔离；body 只允许省略/空/`{}`，不承载业务字段，未知字段一律拒绝。规范化规则至少固定 UTF-8 编码、对象键排序、紧凑分隔符、稳定数值表示；idempotency key 必填，作用域为 `tenant_id + actor_admin_id + key`。具体 API 形状见 [API.md](API.md)，仍待最终确认。
+request_json 是校验后、规范化的业务请求，不是原始字节；request_hash 为其 SHA-256。当前唯一业务参数是课程，因此规范化请求为 `{"courseId": N}`；后续任何会改变语义的参数必须参与指纹。重放按 tenant_id 和 actor_admin_id 隔离；body 只允许省略/空/`{}`，不承载业务字段，未知字段一律拒绝。规范化规则至少固定 UTF-8 编码、对象键排序、紧凑分隔符、稳定数值表示；idempotency key 必填，作用域为 `tenant_id + actor_admin_id + key`。具体 API 形状见已冻结的 [API.md](API.md)。
 
 首次响应与幂等重放应返回同一份已存结果，避免分别序列化导致结果不一致；可以在事务内生成 response_json，提交后原样返回，重放时也原样返回。
 

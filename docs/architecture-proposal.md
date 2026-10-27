@@ -1,6 +1,6 @@
 # Certificate Admin Console 架构草案
 
-状态：架构仍为讨论稿；数据模型及参考 DDL 已确认；API 契约见 [API.md](API.md)，已按题目 A1–A7 核对，待最终确认。本轮只规划，不生成应用代码。
+状态：规划基线已落地。数据模型及参考 DDL 已确认；API 契约见 [API.md](API.md)，已冻结为实现与测试依据；应用、前端、脚本和验证记录已按本文完成，结果见 [README](../README.md) 与 [verification.md](verification.md)。
 
 依据：`Ocean AI Labs Beijing Technical Interview Assessment - 20261.pdf`，版本 20261026。
 本文覆盖产品构建与交付安排，不涉及第 6 节独立书面题的答案。
@@ -13,7 +13,7 @@
 
 题目要求从空仓库开始，在一次三小时内完成，包括规划、文档和打包。实施时应记录实际起止时间，达到时限后停止实现，并如实说明未完成项。
 
-不扩展生产登录、云部署、通知等题目外功能；本轮也不实现 AI 记录导出。
+不扩展生产登录、云部署、通知等题目外功能；AI 记录按题目要求单独保存在仓库的 `ai/` 目录。
 
 ## 2. 推荐技术栈
 
@@ -143,9 +143,9 @@ UTC 时刻是时间事实来源；用租户的 Australia/Sydney 或 Australia/Pe
 
 ## 9. 与后续 AI 交付工作的接口
 
-实现由用户后续启动的 DeepSeek thread 承担，本会话先讨论方案。API 契约已见 [API.md](API.md)；建议在细节固定后另写实现交接文档，汇总 schema、事务步骤、错误语义、A1–A7 检查和完成标准；不让实现线程重新自由选择架构。
+实现由后续 DeepSeek 会话承担，并严格依据已冻结的 [API.md](API.md)、[data-model.md](data-model.md) 和 [schema.sql](schema.sql) 落地；实现没有重新选择架构。事务步骤、错误语义、A1–A7 检查和完成标准见 [verification.md](verification.md)。
 
-用户提到的 `/ai/session`，题目实际要求是仓库内的 `ai/sessions/`，不是 API 路由。本轮只记录边界，后续由用户另启 Agent 编写独立文档并交付：
+用户提到的 `/ai/session`，题目实际要求是仓库内的 `ai/sessions/`，不是 API 路由。交付结构已落盘在 `ai/`，完整性声明见 `ai/completeness.md`：
 
 - `ai/sessions/`：完整原生会话导出，含本次规划、DeepSeek 实现和后续文档/验证会话，保留被拒建议及失败运行。
 - `ai/session-index.csv`：每次会话一行，字段为 session_id、tool、model、started_at、ended_at、export_file、purpose、related_commits，统一时区。
@@ -157,7 +157,7 @@ UTC 时刻是时间事实来源；用租户的 Australia/Sydney 或 Australia/Pe
 
 ## 10. 下一轮再定的细节
 
-数据模型与参考 DDL 已确认，详见 [data-model.md](data-model.md) 和 [schema.sql](schema.sql)。API 契约已独立为 [API.md](API.md)，第 6 节只保留边界；后续需确认 API 契约，再细化查询与事务实现、启动和验收脚本。
+数据模型与参考 DDL 已确认，详见 [data-model.md](data-model.md) 和 [schema.sql](schema.sql)。API 契约已独立为 [API.md](API.md) 并冻结，第 6 节只保留边界；查询与事务实现、启动和验收脚本均已完成，见 [verification.md](verification.md)。
 
 ## 参考资料
 
