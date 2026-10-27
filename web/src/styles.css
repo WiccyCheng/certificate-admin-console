@@ -1,0 +1,350 @@
+@font-face {
+  font-family: "Noto Sans SC Admin";
+  src: url("./assets/noto-sans-sc-admin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #f3f5f7;
+  --surface: #ffffff;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --accent: #0f766e;
+  --accent-soft: #ccfbf1;
+  --navy: #0f172a;
+  --danger: #b91c1c;
+  --el-font-family: "Noto Sans SC Admin", "Inter", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Noto Sans SC Admin", "Inter", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Form controls do not inherit the page font by default; without this the
+   bundled CJK font would be bypassed inside inputs and buttons. */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+.app-shell {
+  min-height: 100%;
+}
+
+.topbar {
+  height: 76px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: var(--navy);
+  color: #f8fafc;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 20px;
+  color: #042f2e;
+  background: linear-gradient(135deg, #5eead4, #14b8a6);
+  box-shadow: 0 6px 18px rgba(20, 184, 166, 0.35);
+}
+
+.brand-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.brand-subtitle {
+  font-size: 11px;
+  color: #94a3b8;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.actor-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.actor-label {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.actor-select {
+  width: 150px;
+}
+
+.tenant-tag {
+  border: none;
+  background: rgba(94, 234, 212, 0.16);
+  color: #5eead4;
+}
+
+.page {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 28px 32px 56px;
+}
+
+.page-alert {
+  margin-bottom: 16px;
+}
+
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.search-input {
+  width: 280px;
+}
+
+.filter-select {
+  width: 160px;
+}
+
+.order-select {
+  width: 100px;
+}
+
+.toolbar-spacer {
+  flex: 1;
+  min-width: 8px;
+}
+
+.cert-table {
+  border-top: 1px solid var(--line);
+}
+
+.cert-table .el-table__row {
+  cursor: pointer;
+}
+
+.cert-table .el-table__row:hover > td.el-table__cell {
+  background: #f0fdfa;
+}
+
+.pagination-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.detail-body {
+  min-height: 240px;
+}
+
+.detail-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.detail-serial {
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 13px;
+  word-break: break-all;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.detail-subtitle {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.detail-descriptions .el-descriptions__label {
+  width: 150px;
+  color: var(--muted);
+}
+
+.danger-zone {
+  margin-top: 24px;
+  padding: 18px;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  background: #fef2f2;
+}
+
+.danger-title {
+  font-weight: 700;
+  color: var(--danger);
+  margin-bottom: 4px;
+}
+
+.danger-hint {
+  color: #7f1d1d;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.issue-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.issue-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.issue-course {
+  width: 280px;
+}
+
+.issue-hint {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.issue-alert {
+  margin-bottom: 14px;
+}
+
+.enrollment-table {
+  margin-bottom: 16px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.result-block {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.result-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.result-title {
+  font-weight: 700;
+}
+
+.result-subtitle {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  margin-top: 4px;
+  word-break: break-all;
+}
+
+.result-counts {
+  display: flex;
+  gap: 22px;
+  margin: 16px 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.result-counts strong {
+  color: var(--ink);
+  font-size: 16px;
+  margin-left: 4px;
+}
+
+.result-counts .issued strong {
+  color: #047857;
+}
+
+.result-counts .skipped strong {
+  color: #b45309;
+}
+
+.result-counts .failed strong {
+  color: var(--danger);
+}
+
+@media (max-width: 960px) {
+  .topbar {
+    height: auto;
+    padding: 16px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actor-switch {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .page {
+    padding: 20px 16px 40px;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .filter-select {
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .toolbar-spacer {
+    display: none;
+  }
+
+  .result-counts {
+    flex-wrap: wrap;
+    gap: 12px 20px;
+  }
+}
