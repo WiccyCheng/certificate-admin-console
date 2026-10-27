@@ -209,7 +209,7 @@ A2 的响应应包含：
 curl -s "$BASE/api/v1/courses/1/enrollments" -H "$ALICE"
 ```
 
-报名列表的 `issuanceEligibility` 同时展示：可发证、课程未完成、已有有效证书、已有吊销证书。计数不变量：`total = results.length = issued + skipped + failed`。
+在 A2 执行前，报名列表的 `issuanceEligibility` 可展示四种资格：可发证、课程未完成、已有有效证书、已有吊销证书。按本节推荐顺序在 A2 后查询时，Alex 已获证，不再出现“可发证”。计数不变量：`total = results.length = issued + skipped + failed`。
 
 ### A5 DST 与本地日期
 
@@ -424,7 +424,7 @@ go test ./internal/httpapi -run TestCSVAbortOnMidStreamError -v
 - 审计查询 API 未实现；审计已持久化，但只能通过详情/测试/直接查库核对。
 - CSV BOM / Excel 兼容选项未实现。
 - 前端可访问性（键盘操作、焦点管理）和 Firefox/Safari/移动端人工验证未完成；自动化只覆盖 Chromium headless。
-- 题目第 6 节独立书面题不在本仓库范围内，应由候选人本人完成并单独声明。
+- 第 6 节书面题已随仓库提交：[written-answers.md](written-answers.md)。候选人确认独立完成且未使用 AI，声明见 [ai/completeness.md](ai/completeness.md)。
 
 ## 8. API 摘要与数据规则
 
@@ -492,4 +492,4 @@ ai/                   AI 会话导出、索引、决策日志、完整性声明
 
 ## 11. AI 交付记录
 
-相关规划、环境失败运行、实现、前端修复和子代理会话的原生 JSON 导出、索引、决策日志及完整性声明均在 [ai/](ai/)。快照边界与导出限制见 [ai/completeness.md](ai/completeness.md)。
+相关 OpenCode 与 Codex 规划、环境失败运行、实现、review、前端修复和子代理会话的原生 JSON / JSONL 导出、索引、决策日志及完整性声明均在 [ai/](ai/)。快照边界与导出限制见 [ai/completeness.md](ai/completeness.md)。

@@ -128,3 +128,16 @@
 - 拒绝：只校验 actor + course（已证明不足）；只依赖 AbortController（响应/异常到达时序不可完全依赖 abort，需要状态层隔离）；在 `closed` 回调无条件重置（快速重开时可能误清空新弹窗）。
 - 证据：Playwright 场景“延迟发证响应 → 关闭 → 重开并选择同一课程 → 释放响应”：无旧“操作结果”，提交按钮可用，新提交可正常执行；主路径冒烟和 `scripts/verify.sh` 通过。
 - 提交：`b94564e`。
+
+## 原始会话追溯补充
+
+此前 D13/D14 的“用户 review”是用户转交的 Codex review 结论，原始复现和审查记录现已归档，不能仅以 OpenCode 中引用的结论代替。
+
+| 决策 | 原始会话 | 关联证据/提交 |
+| --- | --- | --- |
+| 架构与范围取舍（D01） | `01a17c12-e175-7253-b7d3-597eadb965df`；`ses_e837cb6b6ffeMafvJ2NSUF13hQ` | docs/architecture-proposal.md；`57cd388`、`2df1eee` |
+| 数据模型和序列号（D02） | `01a17c1e-da2b-7b21-a1af-3d8f258811b6`；`ses_e83cd1e1cffef3FhZAslzNsT6t` | docs/data-model.md；`d2fc29b` |
+| API 契约接受与纠正（D01/D07） | `01a17c58-8d0a-7d70-8103-d9e146eb85b2`；`ses_e83a03f94ffe58RDubNXem0S7l` | docs/API.md；`a119226` |
+| 前端实现纠正（D13/D14） | `01a17ca5-fdb1-7df2-952f-457c89afeccd`；`ses_e834e9cb6ffeWcZKgwptGPFdh5` | 浏览器复现工具输出、docs/verification.md；`5b1031e`、`b94564e` |
+
+会话文件路径由 session-index.csv 对应。归档补充只修正文档追溯，不改变实现。
